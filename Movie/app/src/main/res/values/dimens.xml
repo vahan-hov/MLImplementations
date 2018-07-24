@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="ImageSize">200dp</dimen>
+    <dimen name="TitleSize">50dp</dimen>
+</resources>
