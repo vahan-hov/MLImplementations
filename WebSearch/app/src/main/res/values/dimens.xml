@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="layWidth">145dp</dimen>
+    <dimen name="btnHeight">59dp</dimen>
+    <dimen name="BtnWidth">121dp</dimen>
+    <dimen name="margBottom">152dp</dimen>
+</resources>
