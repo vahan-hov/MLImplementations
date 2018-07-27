@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="imageSize">150dp</dimen>
+    <dimen name="imageMarginTopSize">50dp</dimen>
+    <dimen name="marginBottomDots">55sp</dimen>
+    <dimen name="dotSize">8dp</dimen>
+    <dimen name="marg_top">30dp</dimen>
+    <dimen name="btnSize">20sp</dimen>
+    <dimen name="txtSize">30sp</dimen>
+    <dimen name="lyt_width">241dp</dimen>
+    <dimen name="lytHeight">124dp</dimen>
+    <dimen name="txtSizeslide3">32sp</dimen>
+    <dimen name="margBtm">175dp</dimen>
+    <dimen name="layBtmS">141dp</dimen>
+    <dimen name="layWidSize">229dp</dimen>
+    <dimen name="margSize">175dp</dimen>
+    <dimen name="layHeight">141dp</dimen>
+    <dimen name="layWidth">229dp</dimen>
+    <dimen name="margTop">81dp</dimen>
+    <dimen name="txtSize2">35sp</dimen>
+    <dimen name="margTop2">236dp</dimen>
+    <dimen name="txtSizeSlide1">28sp</dimen>
+    <dimen name="margBot">127dp</dimen>
+    <dimen name="txtWelcome">37sp</dimen> />
+</resources>

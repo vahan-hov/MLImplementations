@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSlide_1">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/imageSize"
+        android:layout_height="@dimen/imageSize"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margTop"
+        android:src="@drawable/cook" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="@dimen/layWidth"
+        android:layout_height="@dimen/layHeight"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margSize"
+        android:gravity="center_horizontal"
+        android:text="@string/you_can_instantly_choose_your_desired_dishes_see_your_balance_make_payments_as_well_as_track_your_expenses"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="visible" />
+
+</RelativeLayout>
