@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/b1Size"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/image1"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="38dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/b2height"
+        android:layout_below="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:text="@string/image2"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="103dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/b3Height"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:text="@string/image3"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="171dp" />
+
+    <Button
+        android:id="@+id/buttonGal"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/b4Height"
+        android:layout_below="@+id/button3"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/gallery"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/imgWdth"
+        android:layout_height="@dimen/imgHeight"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="136dp"
+        app:srcCompat="@drawable/baelish"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="266dp" />
+
+</RelativeLayout>
