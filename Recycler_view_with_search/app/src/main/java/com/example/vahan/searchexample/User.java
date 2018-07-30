@@ -3,11 +3,7 @@ package com.example.vahan.searchexample;
 public class User {
     private String mImageUrl;
     private String mName;
-
-    public User(String mImageUrl, String mName) {
-        this.mImageUrl = mImageUrl;
-        this.mName = mName;
-    }
+    private String email;
 
     public String getmImageUrl() {
         return mImageUrl;
@@ -23,5 +19,20 @@ public class User {
 
     public void setmName(String mName) {
         this.mName = mName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public User(String mImageUrl, String mName, String email) {
+
+        this.mImageUrl = mImageUrl;
+        this.mName = mName;
+        this.email = email;
     }
 }
