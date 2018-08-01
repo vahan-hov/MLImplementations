@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ScrollingActivity"
+    tools:showIn="@layout/activity_scrolling">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <TextView
+        android:id="@+id/userDescription"
+        android:layout_width="@dimen/descr_size"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/descr_left"
+        android:layout_marginStart="@dimen/descr_start"
+        android:layout_marginTop="@dimen/descr_top"
+        android:maxLines="3"
+        android:text="@string/Baelish" />
+<FrameLayout
+    android:id="@+id/frameWrapperVideo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+        <VideoView
+            android:id="@+id/video"
+            android:layout_width="@dimen/video_width"
+            android:layout_height="@dimen/video_height"
+            android:layout_marginLeft="@dimen/video_left"
+            android:layout_marginStart="@dimen/video_left"
+            android:layout_marginTop="@dimen/video_top" />
+</FrameLayout>
+
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
