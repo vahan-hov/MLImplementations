@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="car_margin_top">1dp</dimen>
+    <dimen name="corner">15dp</dimen>
+    <dimen name="elevation">10dp</dimen>
+    <dimen name="call_height">40dp</dimen>
+    <dimen name="call_width">40dp</dimen>
+    <dimen name="email_height">40dp</dimen>
+    <dimen name="email_weight">40dp</dimen>
+    <dimen name="name_width">200dp</dimen>
+    <dimen name="img_height_female">75dp</dimen>
+    <dimen name="img_width_female">75dp</dimen>
+    <dimen name="margin_img">10dp</dimen>
+    <dimen name="img_width_male">75dp</dimen>
+    <dimen name="img_height_male">75dp</dimen>
+    <dimen name="margin_start_img">7dp</dimen>
+    <dimen name="name_width_male">100dp</dimen>
+    <dimen name="name_height_male">100dp</dimen>
+</resources>
