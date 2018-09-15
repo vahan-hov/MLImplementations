@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">PhotosApp</string>
-    <string name="image1">Image1</string>
-    <string name="image2">Image2</string>
-    <string name="image3">Image3</string>
-    <string name="gallery">GALLERY</string>
-</resources>

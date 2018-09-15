@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="b1Size">50sp</dimen>
-    <dimen name="b2height">50sp</dimen>
-    <dimen name="b3Height">50sp</dimen>
-    <dimen name="b4Height">50sp</dimen>
-    <dimen name="imgWdth">293dp</dimen>
-    <dimen name="imgHeight">167dp</dimen>
-</resources>

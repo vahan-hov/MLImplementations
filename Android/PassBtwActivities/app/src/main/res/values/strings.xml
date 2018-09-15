@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">PassBtwActivities</string>
-    <string name="info">info</string>
-    <string name="enter_text">Enter Text</string>
-    <string name="main_activity">Main Activity</string>
-    <string name="sumbit">Sumbit</string>
-    <string name="second_activity">Second Activity</string>
-    <string name="send_back">Send Back</string>
-</resources>

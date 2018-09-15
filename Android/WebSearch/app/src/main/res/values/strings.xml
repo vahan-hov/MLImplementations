@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">WebSearch</string>
-    <string name="enter_url">Enter URL!</string>
-    <string name="open">Open</string>
-    <string name="warningMSG">Invalid url!</string>
-    <string name="http">http://</string>
-    <string name="https">https://</string>
-</resources>
