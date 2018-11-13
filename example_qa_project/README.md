@@ -4,7 +4,7 @@ The project implements automation testing on 'automationpractice.com' website.
 
 ## Prerequisites
 
-Сhromedriver should be installed in usr/bin/ (other locations included in your PATH environment variable might also work. Otherwise you can add the following line in 'beforclass' method.
+Сhromedriver should be installed in usr/bin/ (other locations included in your PATH environment variable might also work). Otherwise you can add the following line in 'beforclass' method.
 
 ```
 System.setProperty("webdriver.chrome.driver", “/path/to/chromedriver");
@@ -13,7 +13,7 @@ System.setProperty("webdriver.chrome.driver", “/path/to/chromedriver");
 
 ## Usage
 
-```java
+```
 //run all tests
 $ mvn test
 

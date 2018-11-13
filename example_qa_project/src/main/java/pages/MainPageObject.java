@@ -38,6 +38,4 @@ public class MainPageObject extends AbstractPage {
                 findElementByLocator(informationButtonFooter).isDisplayed() &&
                 findElementByLocator(accountButtonFooter).isDisplayed();
     }
-
-
 }

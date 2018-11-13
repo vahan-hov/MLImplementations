@@ -230,11 +230,11 @@ data.addRows(2);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'verifySubcategories')
 data.setCell(0, 2, 'tests.DressesPageTest')
-data.setCell(0, 3, 2415);
+data.setCell(0, 3, 2666);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'verifyTitle')
 data.setCell(1, 2, 'tests.MainPageTest')
-data.setCell(1, 3, 7);
+data.setCell(1, 3, 5);
 window.suiteTableData['Surefire_suite']= { tableData: data, tableDiv: 'times-div-Surefire_suite'}
 return data;
 }
@@ -282,33 +282,49 @@ return data;
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
               <div class="chronological-class-name">tests.DressesPageTest</div> <!-- chronological-class-name -->
-              <div class="configuration-method before">
-                <span class="method-name">setupTest</span>
+              <div class="configuration-class before">
+                <span class="method-name">setupTestBeforeClass</span>
                 <span class="method-start">0 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-method before">
+                <span class="method-name">setupTestBeforeMethod</span>
+                <span class="method-start">1192 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">verifySubcategories</span>
-                <span class="method-start">9019 ms</span>
+                <span class="method-start">9836 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">tearDownTest</span>
-                <span class="method-start">11435 ms</span>
+                <span class="method-name">tearDownTestAfterMethod</span>
+                <span class="method-start">12502 ms</span>
               </div> <!-- configuration-method after -->
+              <div class="configuration-class after">
+                <span class="method-name">tearDownTestAfterClass</span>
+                <span class="method-start">12577 ms</span>
+              </div> <!-- configuration-class after -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">tests.MainPageTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">setupTestBeforeClass</span>
+                <span class="method-start">12578 ms</span>
+              </div> <!-- configuration-class before -->
               <div class="configuration-method before">
-                <span class="method-name">setupTest</span>
-                <span class="method-start">11518 ms</span>
+                <span class="method-name">setupTestBeforeMethod</span>
+                <span class="method-start">13034 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">verifyTitle</span>
-                <span class="method-start">20448 ms</span>
+                <span class="method-start">18885 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">tearDownTest</span>
-                <span class="method-start">20456 ms</span>
+                <span class="method-name">tearDownTestAfterMethod</span>
+                <span class="method-start">18890 ms</span>
               </div> <!-- configuration-method after -->
+              <div class="configuration-class after">
+                <span class="method-name">tearDownTestAfterClass</span>
+                <span class="method-start">18970 ms</span>
+              </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->

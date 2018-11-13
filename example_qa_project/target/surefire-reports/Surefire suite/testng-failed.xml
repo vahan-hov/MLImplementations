@@ -10,16 +10,18 @@
     <classes>
       <class name="tests.MainPageTest">
         <methods>
-          <include name="tearDownTest"/>
+          <include name="tearDownTestAfterMethod"/>
+          <include name="setupTestBeforeMethod"/>
           <include name="verifyTitle"/>
-          <include name="setupTest"/>
+          <include name="tearDownTestAfterClass"/>
         </methods>
       </class> <!-- tests.MainPageTest -->
       <class name="tests.DressesPageTest">
         <methods>
-          <include name="setupTest"/>
-          <include name="tearDownTest"/>
+          <include name="tearDownTestAfterClass"/>
+          <include name="tearDownTestAfterMethod"/>
           <include name="verifySubcategories"/>
+          <include name="setupTestBeforeMethod"/>
         </methods>
       </class> <!-- tests.DressesPageTest -->
     </classes>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tests.DressesPageTest" time="2.093" tests="1" errors="0" skipped="0" failures="0">
+<testsuite name="tests.DressesPageTest" time="2.289" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/amd64"/>
     <property name="java.vm.version" value="25.181-b13"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="/home/vahan/IdeaProjects/example_qa_project"/>
+    <property name="maven.multiModuleProjectDirectory" value="/home/vahan/Desktop/machine_learning_stuff/example_qa_project"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=":"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="test" value="DressesPageTest#verifySubcategories"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/vahan/IdeaProjects/example_qa_project"/>
+    <property name="user.dir" value="/home/vahan/Desktop/machine_learning_stuff/example_qa_project"/>
     <property name="java.runtime.version" value="1.8.0_181-b13"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-oracle/jre/lib/endorsed"/>
@@ -60,5 +60,5 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="verifySubcategories" classname="tests.DressesPageTest" time="2.093"/>
+  <testcase name="verifySubcategories" classname="tests.DressesPageTest" time="2.289"/>
 </testsuite>
