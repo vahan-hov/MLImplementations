@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" verbose="0" name="Failed suite [Surefire suite]">
+  <test thread-count="1" verbose="0" name="Surefire test(failed)">
+    <groups>
+      <run>
+        <include name="smoke"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="tests.MainPageTest">
+        <methods>
+          <include name="tearDownTest"/>
+          <include name="verifyTitle"/>
+          <include name="setupTest"/>
+        </methods>
+      </class> <!-- tests.MainPageTest -->
+      <class name="tests.DressesPageTest">
+        <methods>
+          <include name="setupTest"/>
+          <include name="tearDownTest"/>
+          <include name="verifySubcategories"/>
+        </methods>
+      </class> <!-- tests.DressesPageTest -->
+    </classes>
+  </test> <!-- Surefire test(failed) -->
+</suite> <!-- Failed suite [Surefire suite] -->
