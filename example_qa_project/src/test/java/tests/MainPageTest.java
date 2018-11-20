@@ -37,7 +37,7 @@ public class MainPageTest {
     @Test(groups = {"smoke"})
     public void verifyTitle() {
         System.out.println("==========================");
-        System.out.println("verifyProfile");
+        System.out.println("verifyProfile : current thread id : " + Thread.currentThread().getId());
         System.out.println("==========================");
         boolean isTitleGOTDisplayed = mainPageObject.isTitleGOTDisplayed();
         Assert.assertTrue(isTitleGOTDisplayed, ApplicationProperties.WRONG_TITLE);
@@ -49,7 +49,7 @@ public class MainPageTest {
     @Test
     public void verifyMainPageHeader() {
         System.out.println("==========================");
-        System.out.println("verifyMainPageHeader");
+        System.out.println("verifyMainPageHeader : current thread id : " + Thread.currentThread().getId());
         System.out.println("==========================");
         boolean isHeaderDisplayed = mainPageObject.isHeaderDisplayed();
         Assert.assertTrue(isHeaderDisplayed, ApplicationProperties.HEADER_IS_NOT_DISPLAYED_PROPERLY);
@@ -61,7 +61,7 @@ public class MainPageTest {
     @Test
     public void verifyMainPageFooter() {
         System.out.println("==========================");
-        System.out.println("verifyMainPageFooter");
+        System.out.println("verifyMainPageFooter : current thread id : " + Thread.currentThread().getId());
         System.out.println("==========================");
         boolean isFooterDisplayed = mainPageObject.isFooterDisplayed();
         Assert.assertTrue(isFooterDisplayed, ApplicationProperties.FOOTER_IS_NOT_DISPLAYED_PROPERLY);

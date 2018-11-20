@@ -40,7 +40,7 @@ public class DressesPageTest {
     @Test(groups = {"smoke"})
     public void verifySubcategories() {
         System.out.println("==========================");
-        System.out.println("verifySubcategories");
+        System.out.println("verifySubcategories : current thread id : " + Thread.currentThread().getId());
         System.out.println("==========================");
         dressesPageObject.navigateToDressesSection();
 
@@ -54,7 +54,7 @@ public class DressesPageTest {
     @Test
     public void verifyPopularDresses() {
         System.out.println("==========================");
-        System.out.println("verifyPopularDresses");
+        System.out.println("verifyPopularDresses : current thread id : " + Thread.currentThread().getId());
         System.out.println("==========================");
         dressesPageObject.navigateToDressesSection();
 

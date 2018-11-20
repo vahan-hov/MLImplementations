@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Main Test Suite" parallel="tests" verbose="1">
-    <test name="Grid chrome Test">
-        <parameter name="browser" value="chrome"/>
+<suite name="Parallel_test_suite" parallel="methods" thread-count="5">
+    <test name="Parallel test">
+        <parameter value="chrome"/>
         <classes>
             <class name="tests.MainPageTest"/>
-        </classes>
-    </test>
-    <test name="Grid chrome Test">
-        <parameter name="browser" value="chrome"/>
-        <classes>
-            <class name="tests.MainPageTest"/>
+            <class name="tests.DressesPageTest"/>
         </classes>
     </test>
 </suite>

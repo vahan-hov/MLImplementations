@@ -4,11 +4,7 @@ The project implements parallel automation testing on 'automationpractice.com' w
 
 ## Prerequisites
 
-* Install Сhromedriver in usr/bin/ (other locations included in your PATH environment variable should also work). Otherwise you can add the following line in 'beforclass' method.
-
-```
-System.setProperty("webdriver.chrome.driver", “/path/to/chromedriver");
-```
+ * Install Сhromedriver in usr/bin/ 
 
  * Install java 
 
