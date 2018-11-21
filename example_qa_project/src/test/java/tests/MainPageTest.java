@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.MainPageObject;
 import common.ApplicationProperties;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -34,36 +35,48 @@ public class MainPageTest {
         driver.navigate().to(ApplicationProperties.webPageURL);
     }
 
+    /**
+     * Verify the page title is displayed.
+     */
     @Test(groups = {"smoke"})
     public void verifyTitle() {
         System.out.println("==========================");
-        System.out.println("verifyProfile : current thread id : " + Thread.currentThread().getId());
+        System.out.println("verifyTitle : current thread id : " + Thread.currentThread().getId());
         System.out.println("==========================");
-        boolean isTitleGOTDisplayed = mainPageObject.isTitleGOTDisplayed();
+        boolean isTitleGOTDisplayed = mainPageObject.isTitleDisplayed();
         Assert.assertTrue(isTitleGOTDisplayed, ApplicationProperties.WRONG_TITLE);
+        System.out.println("==========================");
+        System.out.println("verifyTitle : End : ");
+        System.out.println("==========================");
     }
 
     /**
-     * This case verifies the page title is displayed.
+     * Verify page header items are  is displayed.
      */
     @Test
     public void verifyMainPageHeader() {
         System.out.println("==========================");
         System.out.println("verifyMainPageHeader : current thread id : " + Thread.currentThread().getId());
         System.out.println("==========================");
-        boolean isHeaderDisplayed = mainPageObject.isHeaderDisplayed();
+        boolean isHeaderDisplayed = mainPageObject.isHeaderItemsDisplayed();
         Assert.assertTrue(isHeaderDisplayed, ApplicationProperties.HEADER_IS_NOT_DISPLAYED_PROPERLY);
+        System.out.println("==========================");
+        System.out.println("verifyMainPageHeader : End : ");
+        System.out.println("==========================");
     }
 
     /**
-     * This case verifies the page footer is displayed.
+     * This case verifies the page central image is displayed.
      */
     @Test
-    public void verifyMainPageFooter() {
+    public void verifyMainPageCentralImage() {
         System.out.println("==========================");
-        System.out.println("verifyMainPageFooter : current thread id : " + Thread.currentThread().getId());
+        System.out.println("verifyMainPageCentralImage : current thread id : " + Thread.currentThread().getId());
         System.out.println("==========================");
-        boolean isFooterDisplayed = mainPageObject.isFooterDisplayed();
-        Assert.assertTrue(isFooterDisplayed, ApplicationProperties.FOOTER_IS_NOT_DISPLAYED_PROPERLY);
+        boolean isFooterDisplayed = mainPageObject.isImageDisplayed();
+        Assert.assertTrue(isFooterDisplayed, ApplicationProperties.IMAGE_IS_NOT_DISPLAYED_PROPERLY);
+        System.out.println("==========================");
+        System.out.println("verifyMainPageCentralImage : End ");
+        System.out.println("==========================");
     }
 }

@@ -1,41 +1,38 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.util.List;
 
 public class MainPageObject extends AbstractPage {
 
-    private final String pageTitle = "My Store";
+    private final String pageTitle = "Game of Thrones - Official Website for the HBO Series";
 
-    private final By womentButtonHeader = By.xpath("//*[@id=\"block_top_menu\"]/ul/li[1]/a");
+    private final By mainPageHeader = By.xpath("/html/body/main/div[1]/div/div/header/div[1]/div[3]/div/div/div/ul/li");
 
-    private final By dressesButtonHeader = By.xpath("//*[@id=\"block_top_menu\"]/ul/li[2]/a");
-
-    private final By tShirtsButtonHeader = By.xpath("//*[@id=\"block_top_menu\"]/ul/li[3]/a");
-
-    private final By womentButtonFooter = By.xpath("//h4[contains(text(), 'Categories')]");
-
-    private final By informationButtonFooter = By.xpath("//h4[contains(text(), 'Information')]");
-
-    private final By accountButtonFooter = By.xpath("//a[contains(text(), 'My account')]");
+    private final By mainPageImage = By.xpath("/html/body/main/div[2]/div/div/div[1]/div[1]/img[2]");
 
     public MainPageObject(RemoteWebDriver driver) {
         super(driver);
     }
 
-    public boolean isTitleGOTDisplayed() {
+    public boolean isTitleDisplayed() {
         return pageTitle.equals(driver.getTitle());
     }
 
-    public boolean isHeaderDisplayed() {
-        return findElementByLocator(womentButtonHeader).isDisplayed() &&
-                findElementByLocator(dressesButtonHeader).isDisplayed() &&
-                findElementByLocator(tShirtsButtonHeader).isDisplayed();
+    public boolean isHeaderItemsDisplayed() {
+        List<WebElement> headerItems = findElementListByLocator(mainPageHeader);
+        for (WebElement item : headerItems) {
+            if (!item.isDisplayed()) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public boolean isFooterDisplayed() {
-        return findElementByLocator(womentButtonFooter).isDisplayed() &&
-                findElementByLocator(informationButtonFooter).isDisplayed() &&
-                findElementByLocator(accountButtonFooter).isDisplayed();
+    public boolean isImageDisplayed() {
+        return findElementByLocator(mainPageImage).isDisplayed();
     }
 }
