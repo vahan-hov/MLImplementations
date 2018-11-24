@@ -1,5 +1,8 @@
 package tests;
 
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
@@ -19,9 +22,18 @@ public class CastAndCrewPageTest {
     private RemoteWebDriver driver;
 
     @BeforeClass(alwaysRun = true)
-    public void setupTestBeforeClass() throws MalformedURLException {
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), capabilities);
+    @Parameters({"os", "browser"})
+    public void setupTestBeforeClass(String os, String browser) throws MalformedURLException {
+        Platform platform = Platform.fromString(os.toUpperCase());
+        if (browser.equalsIgnoreCase("chrome")) {
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.setCapability("platform", platform);
+            this.driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), chromeOptions);
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setCapability("platform", platform);
+            this.driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), firefoxOptions);
+        }
     }
 
     @AfterClass(alwaysRun = true)
@@ -40,7 +52,7 @@ public class CastAndCrewPageTest {
     /**
      * Verify that actor names are displayed.
      */
-    @Test(groups = {"smoke"})
+    @Test(groups = {"smoke","MainPageTest"})
     public void verifyActorNames() {
         System.out.println("==========================");
         System.out.println("verifyActorNames : current thread id : " + Thread.currentThread().getId());
@@ -54,7 +66,7 @@ public class CastAndCrewPageTest {
     /**
      * Verify that header is displayed in 'cast and crew' section.
      */
-    @Test
+    @Test(groups = {"MainPageTest"})
     public void verifyHeaderIsDisplayed() {
         System.out.println("==========================");
         System.out.println("verifyHeaderIsDisplayed : current thread id : " + Thread.currentThread().getId());

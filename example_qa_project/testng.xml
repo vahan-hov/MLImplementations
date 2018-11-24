@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite" parallel="tests">
+<suite name="Suite">
 
-    <test name="MainPageTest">
-        <parameter name="browser" value="chrome"/>
+    <test name="CastAndCrewPageTest">
         <classes>
-            <class name="tests.MainPageTest"/>
+            <class name="tests.CastAndCrewPageTest"/>
         </classes>
     </test>
 
-    <test name="CastAndCrewPageTest">
-        <parameter name="browser" value="chrome"/>
+    <test name="MainPageTest">
         <classes>
-            <class name="tests.CastAndCrewPageTest"/>
+            <class name="tests.MainPageTest"/>
         </classes>
     </test>
 
     <test name="all">
-        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="tests.MainPageTest"/>
             <class name="tests.CastAndCrewPageTest"/>
         </classes>
     </test>
-</suite>
+
+ </suite>

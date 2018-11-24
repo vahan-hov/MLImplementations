@@ -1,9 +1,13 @@
 package tests;
 
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
+import org.testng.xml.XmlSuite;
 import pages.MainPageObject;
 import common.ApplicationProperties;
 import java.net.MalformedURLException;
@@ -16,10 +20,26 @@ public class MainPageTest {
     private MainPageObject mainPageObject;
     private RemoteWebDriver driver;
 
+    @BeforeSuite(alwaysRun = true)
+    public void beforeSuite(ITestContext context) {
+        context.getCurrentXmlTest().getSuite().setParallel(XmlSuite.ParallelMode.TESTS);
+        context.getCurrentXmlTest().getSuite().setThreadCount(3);
+    }
+
     @BeforeClass(alwaysRun = true)
-    public void setupTestBeforeClass() throws MalformedURLException {
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), capabilities);
+    @Parameters({"os", "browser"})
+    public void setupTestBeforeClass(String os, String browser) throws MalformedURLException {
+        Platform platform = Platform.fromString(os.toUpperCase());
+        if (browser.equalsIgnoreCase("chrome")) {
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.setCapability("platform", platform);
+            this.driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), chromeOptions);
+
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setCapability("platform", platform);
+            this.driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), firefoxOptions);
+        }
     }
 
     @AfterClass(alwaysRun = true)
@@ -37,7 +57,7 @@ public class MainPageTest {
     /**
      * Verify the page title is displayed.
      */
-    @Test(groups = {"smoke"})
+    @Test(groups = {"MainPageTest"})
     public void verifyTitle() {
         System.out.println("==========================");
         System.out.println("verifyTitle : current thread id : " + Thread.currentThread().getId());
@@ -49,7 +69,7 @@ public class MainPageTest {
     /**
      * Verify page header items are  is displayed.
      */
-    @Test
+    @Test(groups = {"smoke","MainPageTest"})
     public void verifyMainPageHeader() {
         System.out.println("==========================");
         System.out.println("verifyMainPageHeader : current thread id : " + Thread.currentThread().getId());
@@ -61,7 +81,7 @@ public class MainPageTest {
     /**
      * This case verifies the page central image is displayed.
      */
-    @Test
+    @Test(groups = {"MainPageTest"})
     public void verifyMainPageCentralImage() {
         System.out.println("==========================");
         System.out.println("verifyMainPageCentralImage : current thread id : " + Thread.currentThread().getId());
