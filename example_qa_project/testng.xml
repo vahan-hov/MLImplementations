@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Parallel_test_suite" parallel="methods" thread-count="2">
-    <test name="Parallel test">
-        <parameter value="chrome"/>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests">
+
+    <test name="MainPageTest">
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="tests.MainPageTest"/>
         </classes>
     </test>
-    <test name="Parallel test">
-        <parameter value="chrome"/>
+
+    <test name="CastAndCrewPageTest">
+        <parameter name="browser" value="chrome"/>
         <classes>
+            <class name="tests.CastAndCrewPageTest"/>
+        </classes>
+    </test>
+
+    <test name="all">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.MainPageTest"/>
             <class name="tests.CastAndCrewPageTest"/>
         </classes>
     </test>

@@ -7,7 +7,6 @@ import org.testng.annotations.*;
 import pages.CastAndCrewPageObject;
 import common.ApplicationProperties;
 import pages.MainPageObject;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -50,9 +49,6 @@ public class CastAndCrewPageTest {
 
         boolean isSubcategoriesDisplayed = castAndCrewPageObject.isActorNamesDisplayed();
         Assert.assertTrue(isSubcategoriesDisplayed, ApplicationProperties.ACTORS_NAMES_ARE_NOT_DISPLAYED_PROPERLY);
-        System.out.println("==========================");
-        System.out.println("verifyActorNames : End : ");
-        System.out.println("==========================");
     }
 
     /**
@@ -67,8 +63,5 @@ public class CastAndCrewPageTest {
 
         boolean isPopularDressesDisplayed = mainPageObject.isHeaderItemsDisplayed();
         Assert.assertTrue(isPopularDressesDisplayed, ApplicationProperties.HEADER_IS_NOT_DISPLAYED_PROPERLY);
-        System.out.println("==========================");
-        System.out.println("verifyHeaderIsDisplayed : End : ");
-        System.out.println("==========================");
     }
 }

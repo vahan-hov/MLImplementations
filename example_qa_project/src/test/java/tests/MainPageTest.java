@@ -6,7 +6,6 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.MainPageObject;
 import common.ApplicationProperties;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -45,9 +44,6 @@ public class MainPageTest {
         System.out.println("==========================");
         boolean isTitleGOTDisplayed = mainPageObject.isTitleDisplayed();
         Assert.assertTrue(isTitleGOTDisplayed, ApplicationProperties.WRONG_TITLE);
-        System.out.println("==========================");
-        System.out.println("verifyTitle : End : ");
-        System.out.println("==========================");
     }
 
     /**
@@ -60,9 +56,6 @@ public class MainPageTest {
         System.out.println("==========================");
         boolean isHeaderDisplayed = mainPageObject.isHeaderItemsDisplayed();
         Assert.assertTrue(isHeaderDisplayed, ApplicationProperties.HEADER_IS_NOT_DISPLAYED_PROPERLY);
-        System.out.println("==========================");
-        System.out.println("verifyMainPageHeader : End : ");
-        System.out.println("==========================");
     }
 
     /**
@@ -75,8 +68,5 @@ public class MainPageTest {
         System.out.println("==========================");
         boolean isFooterDisplayed = mainPageObject.isImageDisplayed();
         Assert.assertTrue(isFooterDisplayed, ApplicationProperties.IMAGE_IS_NOT_DISPLAYED_PROPERLY);
-        System.out.println("==========================");
-        System.out.println("verifyMainPageCentralImage : End ");
-        System.out.println("==========================");
     }
 }
