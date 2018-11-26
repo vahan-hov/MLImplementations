@@ -5,11 +5,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.ITestContext;
 import org.testng.annotations.*;
-import org.testng.xml.XmlSuite;
 import pages.MainPageObject;
 import common.ApplicationProperties;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -19,43 +18,53 @@ import java.net.URL;
 public class MainPageTest {
     private MainPageObject mainPageObject;
     private RemoteWebDriver driver;
+    private ChromeOptions chromeOptions;
+    private FirefoxOptions firefoxOptions;
 
-    @BeforeSuite(alwaysRun = true)
-    public void beforeSuite(ITestContext context) {
-        context.getCurrentXmlTest().getSuite().setParallel(XmlSuite.ParallelMode.TESTS);
-        context.getCurrentXmlTest().getSuite().setThreadCount(3);
-    }
-
+    /**
+     * This methods runs before the class runs and instantiates driver as chrome or firefox driver depending on the argument given.
+     * Also the method sets different attributes for driver again depending on the arguments.
+     */
     @BeforeClass(alwaysRun = true)
-    @Parameters({"os", "browser"})
-    public void setupTestBeforeClass(String os, String browser) throws MalformedURLException {
+    @Parameters({"os", "browser", "browserVersion"})
+    public void setupTestBeforeClass(String os, String browser, String browserVersion) {
         Platform platform = Platform.fromString(os.toUpperCase());
-        if (browser.equalsIgnoreCase("chrome")) {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.setCapability("platform", platform);
-            this.driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), chromeOptions);
-
-        } else if (browser.equalsIgnoreCase("firefox")) {
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.setCapability("platform", platform);
-            this.driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), firefoxOptions);
+        if (browser.equalsIgnoreCase(ApplicationProperties.CHROME_STRING)) {
+            this.chromeOptions = new ChromeOptions();
+            chromeOptions.setCapability(ApplicationProperties.PLATFORM_STRING, platform);
+            chromeOptions.setCapability(ApplicationProperties.BROWSER_VERSION_STRING, browserVersion);
+        } else if (browser.equalsIgnoreCase(ApplicationProperties.FIREFOX_STRING)) {
+            this.firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setCapability(ApplicationProperties.PLATFORM_STRING, platform);
+            firefoxOptions.setCapability(ApplicationProperties.BROWSER_VERSION_STRING, browserVersion);
         }
     }
 
+    /**
+     * This method runs after the class and quites browser window and sets driver to 'null'.
+     */
     @AfterClass(alwaysRun = true)
     public void tearDownTestAfterClass() {
         driver.quit();
         driver = null;
     }
 
+    /**
+     * This method runs before every method and creates a new driver (chrome or firefox) and navigates to the URL of website.
+     */
     @BeforeMethod(alwaysRun = true)
-    public void setupTestBeforeMethod() {
+    public void setupTestBeforeMethod() throws MalformedURLException {
+        if (chromeOptions != null) {
+            this.driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), chromeOptions);
+        } else if (firefoxOptions != null) {
+            this.driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), firefoxOptions);
+        }
         mainPageObject = new MainPageObject(driver);
         driver.navigate().to(ApplicationProperties.webPageURL);
     }
 
     /**
-     * Verify the page title is displayed.
+     * Verify the page title (the one displayed inside browser tab) is displayed.
      */
     @Test(groups = {"MainPageTest"})
     public void verifyTitle() {
@@ -67,9 +76,9 @@ public class MainPageTest {
     }
 
     /**
-     * Verify page header items are  is displayed.
+     * Verify page header items are is displayed in the main page.
      */
-    @Test(groups = {"smoke","MainPageTest"})
+    @Test(groups = {"smoke", "MainPageTest"})
     public void verifyMainPageHeader() {
         System.out.println("==========================");
         System.out.println("verifyMainPageHeader : current thread id : " + Thread.currentThread().getId());
@@ -79,7 +88,7 @@ public class MainPageTest {
     }
 
     /**
-     * This case verifies the page central image is displayed.
+     * This case verifies the page central image of the main page is displayed.
      */
     @Test(groups = {"MainPageTest"})
     public void verifyMainPageCentralImage() {

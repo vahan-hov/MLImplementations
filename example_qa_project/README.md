@@ -1,10 +1,16 @@
 # My example qa project
 
-The project implements parallel automation testing on 'automationpractice.com' website.
+The project implements parallel automation testing on '/www.hbo.com' website.
 
 ## Prerequisites
 
- * Install Сhromedriver in usr/bin/ 
+ * Download Сhromedriver in usr/bin/ 
+  
+ * Download Firefoxdriver in usr/bin/
+  
+ * Install chrome 
+  
+ * Install firefox 
 
  * Install java 
 
@@ -27,14 +33,14 @@ The project implements parallel automation testing on 'automationpractice.com' w
 
 ```
 //run all tests
-$ mvn test
+$ mvn test -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3
 
 //Run a class
-$ mvn test -Dtest=CLASS_NAME
+$ mvn test -Dtest=MainPageTest -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3
 
 //Run a specific case
-$ mvn test -Dtest=CLASS_NAME#METHOD_NAME
+$ mvn test -Dtest=MainPageTest#verifyMainPageCentralImage -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3
 
 //Run a group.Only 'smoke' group is present.
-$ mvn test -Dgroups=smoke
+$ mvn test -Dgroups=smoke -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3
 ```
