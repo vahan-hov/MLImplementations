@@ -30,8 +30,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <parallel>methods</parallel>
+                    <parallel>${parallel}</parallel>
                     <threadCount>${threadCount}</threadCount>
+                    <suiteXmlFiles>
+                        testng.xml
+                    </suiteXmlFiles>
                 </configuration>
             </plugin>
         </plugins>
