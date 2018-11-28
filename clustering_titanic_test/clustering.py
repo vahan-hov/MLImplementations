@@ -2,15 +2,17 @@ import matplotlib.pyplot as plt
 from math import sqrt
 from matplotlib import style
 import numpy as np
+from sklearn import preprocessing
+import pandas as pd
 
 style.use('ggplot')
 
-X = np.array([[1, 2],
-              [1.5, 1.8],
-              [5, 8],
-              [8, 8],
-              [1, 0.6],
-              [9, 11]])
+# X = np.array([[1, 2],
+#               [1.5, 1.8],
+#               [5, 8],
+#               [8, 8],
+#               [1, 0.6],
+#               [9, 11]])
 
 colors = ['r', 'g', 'b', 'c', 'k', 'o', 'y']
 
@@ -84,7 +86,65 @@ class KMeans:
             return 1
 
 
-k_means = KMeans()
-k_means.fit(X)
-k_means.predict([5, 5])
-plt._show()
+df = pd.read_excel('titanic.xls')
+df.drop(['body', 'name'], 1, inplace=True)
+# df.convert_objects(convert_numeric=True)
+# print(df.head())
+df.fillna(0, inplace=True)
+
+
+def handle_non_numerical_data(df):
+    # handling non-numerical data: must convert.
+    columns = df.columns.values
+
+    for column in columns:
+        text_digit_vals = {}
+
+        def convert_to_int(val):
+            return text_digit_vals[val]
+
+        # print(column,df[column].dtype)
+        if df[column].dtype != np.int64 and df[column].dtype != np.float64:
+
+            column_contents = df[column].values.tolist()
+            # finding just the uniques
+            unique_elements = set(column_contents)
+            # great, found them.
+            x = 0
+            for unique in unique_elements:
+                if unique not in text_digit_vals:
+                    # creating dict that contains new
+                    # id per unique string
+                    text_digit_vals[unique] = x
+                    x += 1
+            # now we map the new "id" vlaue
+            # to replace the string.
+            df[column] = list(map(convert_to_int, df[column]))
+
+    return df
+
+
+df = handle_non_numerical_data(df)
+
+# add/remove features just to see impact they have.
+df.drop(['ticket', 'home.dest'], 1, inplace=True)
+
+X = np.array(df.drop(['survived'], 1).astype(float))
+X = preprocessing.scale(X)
+y = np.array(df['survived'])
+
+# X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.5)
+
+clf = KMeans()
+clf.fit(X)
+
+correct = 0
+for i, val in enumerate(X):
+    predict_me = np.array(X[i].astype(float))
+    predict_me = predict_me.reshape(-1, len(predict_me))
+    for j, point in enumerate(predict_me):
+        prediction = clf.predict(point)
+        if prediction == y[i]:
+            correct += 1
+
+print(correct / float(len(X)))
