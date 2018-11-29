@@ -33,14 +33,14 @@ The project implements parallel automation testing on '/www.hbo.com' website.
 
 ```
 //run all tests
-$ mvn test -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3 -Dparallel=methods
+$ mvn test -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3
 
 //Run a class
-$ mvn test -Dtest=MainPageTest -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3 -Dparallel=methods
+$ mvn test -Dtest=MainPageTest -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3
 
 //Run a specific case
-$ mvn test -Dtest=MainPageTest#verifyMainPageCentralImage -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3 -Dparallel=methods
+$ mvn test -Dtest=MainPageTest#verifyMainPageCentralImage -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3
 
 //Run a group.Only 'smoke' group is present.
-$ mvn test -Dgroups=smoke -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3 -Dparallel=methods
+$ mvn test -Dgroups=smoke -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3
 ```

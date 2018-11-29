@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="GRID SAMPLE TEST">
+    <test name="GRID TEST WITH SERIAL EXECTION WITH BROWSER FF">
+        <parameter name ="browser" value="firefox"/>
+        <classes>
+            <class name ="tests.MainPageTest"/>
+            <class name ="tests.CastAndCrewPageTest"/>
+        </classes>
+    </test>
+    <test name="GRID TEST WITH SERIAL EXECTION WITH BROWSER CHROME">
+        <parameter name ="browser" value="chrome"/>
+        <classes>
+            <class name ="tests.MainPageTest"/>
+            <class name ="tests.CastAndCrewPageTest"/>
+        </classes>
+    </test>
+</suite>
