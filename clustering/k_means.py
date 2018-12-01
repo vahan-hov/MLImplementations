@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from math import sqrt
 from matplotlib import style
+
 import numpy as np
 
 style.use('ggplot')
