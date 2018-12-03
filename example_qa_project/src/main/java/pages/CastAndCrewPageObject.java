@@ -12,7 +12,7 @@ public class CastAndCrewPageObject extends AbstractPage {
 
     private final By actorsNames = By.xpath("/html/body/main/div[2]/div/div/div[1]/div/div/div");
 
-    private final By castAndCrewButton = By.xpath("/html/body/main/div[1]/div/div/header/div[1]/div[3]/div/div/div/ul/li[3]/div");
+    private final String castAndCrewPageURL = "https://www.hbo.com/game-of-thrones/cast-and-crew";
 
     public CastAndCrewPageObject(RemoteWebDriver driver) {
         super(driver);
@@ -20,8 +20,7 @@ public class CastAndCrewPageObject extends AbstractPage {
 
     public void navigateToCastAndCrewSection() {
         try {
-            Thread.sleep(5000);
-            click(castAndCrewButton);
+            driver.get(castAndCrewPageURL);
             Thread.sleep(5000);
             waitVisibility(castText);
         } catch (InterruptedException e) {

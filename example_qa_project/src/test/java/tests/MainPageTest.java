@@ -1,13 +1,14 @@
 package tests;
 
+import common.ApplicationProperties;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.MainPageObject;
-import common.ApplicationProperties;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,9 +18,9 @@ import java.net.URL;
  */
 public class MainPageTest {
     private MainPageObject mainPageObject;
-    private RemoteWebDriver driver;
     private ChromeOptions chromeOptions;
     private FirefoxOptions firefoxOptions;
+    private static final ThreadLocal<RemoteWebDriver> drivers = new ThreadLocal<RemoteWebDriver>();
 
     /**
      * This methods runs before the class runs and instantiates driver as chrome or firefox driver depending on the argument given.
@@ -41,26 +42,40 @@ public class MainPageTest {
     }
 
     /**
-     * This method runs after the class and quites browser window and sets driver to 'null'.
+     * This method runs before every method and creates a new driver (chrome or firefox) and navigates to the URL of website.
      */
-    @AfterClass(alwaysRun = true)
-    public void tearDownTestAfterClass() {
+    @BeforeMethod(alwaysRun = true)
+    public void setupTestBeforeMethod(ITestResult testResult) throws MalformedURLException {
+        RemoteWebDriver driver = null;
+        if (chromeOptions != null) {
+            driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), chromeOptions);
+        } else if (firefoxOptions != null) {
+            driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), firefoxOptions);
+        }
+        drivers.set(driver);
+        mainPageObject = new MainPageObject(driver());
+        driver().navigate().to(ApplicationProperties.webPageURL);
+    }
+
+    /**
+     * This method runs after each test and quites browser window and sets driver to 'null'.
+     */
+    @AfterMethod(alwaysRun = true)
+    public void tearDownTestAfterMethod() {
+        RemoteWebDriver driver = driver();
         driver.quit();
         driver = null;
     }
 
     /**
-     * This method runs before every method and creates a new driver (chrome or firefox) and navigates to the URL of website.
+     * This method returns driver instance if it's value is not null.
      */
-    @BeforeMethod(alwaysRun = true)
-    public void setupTestBeforeMethod() throws MalformedURLException {
-        if (chromeOptions != null) {
-            this.driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), chromeOptions);
-        } else if (firefoxOptions != null) {
-            this.driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), firefoxOptions);
+    private RemoteWebDriver driver() {
+        RemoteWebDriver driver = drivers.get();
+        if (driver == null) {
+            throw new IllegalStateException("Driver should have not been null.");
         }
-        mainPageObject = new MainPageObject(driver);
-        driver.navigate().to(ApplicationProperties.webPageURL);
+        return driver;
     }
 
     /**
