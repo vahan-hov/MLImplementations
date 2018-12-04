@@ -6,8 +6,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 import pages.MainPageObject;
 
 import java.net.MalformedURLException;
@@ -17,43 +19,35 @@ import java.net.URL;
  * This class executes tests to ensure the main page of the website works as expected.
  */
 public class MainPageTest {
-    private MainPageObject mainPageObject;
-    private ChromeOptions chromeOptions;
-    private FirefoxOptions firefoxOptions;
     private static final ThreadLocal<RemoteWebDriver> drivers = new ThreadLocal<RemoteWebDriver>();
-
-    /**
-     * This methods runs before the class runs and instantiates driver as chrome or firefox driver depending on the argument given.
-     * Also the method sets different attributes for driver again depending on the arguments.
-     */
-    @BeforeClass(alwaysRun = true)
-    @Parameters({"os", "browser", "browserVersion"})
-    public void setupTestBeforeClass(String os, String browser, String browserVersion) {
-        Platform platform = Platform.fromString(os.toUpperCase());
-        if (browser.equalsIgnoreCase(ApplicationProperties.CHROME_STRING)) {
-            this.chromeOptions = new ChromeOptions();
-            chromeOptions.setCapability(ApplicationProperties.PLATFORM_STRING, platform);
-            chromeOptions.setCapability(ApplicationProperties.BROWSER_VERSION_STRING, browserVersion);
-        } else if (browser.equalsIgnoreCase(ApplicationProperties.FIREFOX_STRING)) {
-            this.firefoxOptions = new FirefoxOptions();
-            firefoxOptions.setCapability(ApplicationProperties.PLATFORM_STRING, platform);
-            firefoxOptions.setCapability(ApplicationProperties.BROWSER_VERSION_STRING, browserVersion);
-        }
-    }
 
     /**
      * This method runs before every method and creates a new driver (chrome or firefox) and navigates to the URL of website.
      */
     @BeforeMethod(alwaysRun = true)
-    public void setupTestBeforeMethod(ITestResult testResult) throws MalformedURLException {
+    @Parameters({"os", "browser", "browserVersion"})
+    public void setupTestBeforeMethod(String os, String browser, String browserVersion) throws MalformedURLException {
+        ChromeOptions chromeOptions = null;
+        FirefoxOptions firefoxOptions = null;
+        Platform platform = Platform.fromString(os.toUpperCase());
+        if (browser.equalsIgnoreCase(ApplicationProperties.CHROME_STRING)) {
+            chromeOptions = new ChromeOptions();
+            chromeOptions.setCapability(ApplicationProperties.PLATFORM_STRING, platform);
+            chromeOptions.setCapability(ApplicationProperties.BROWSER_VERSION_STRING, browserVersion);
+        } else if (browser.equalsIgnoreCase(ApplicationProperties.FIREFOX_STRING)) {
+            firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setCapability(ApplicationProperties.PLATFORM_STRING, platform);
+            firefoxOptions.setCapability(ApplicationProperties.BROWSER_VERSION_STRING, browserVersion);
+        }
+
         RemoteWebDriver driver = null;
+
         if (chromeOptions != null) {
             driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), chromeOptions);
         } else if (firefoxOptions != null) {
             driver = new RemoteWebDriver(new URL(ApplicationProperties.LOCALHOST_URL), firefoxOptions);
         }
         drivers.set(driver);
-        mainPageObject = new MainPageObject(driver());
         driver().navigate().to(ApplicationProperties.webPageURL);
     }
 
@@ -64,7 +58,6 @@ public class MainPageTest {
     public void tearDownTestAfterMethod() {
         RemoteWebDriver driver = driver();
         driver.quit();
-        driver = null;
     }
 
     /**
@@ -86,6 +79,8 @@ public class MainPageTest {
         System.out.println("==========================");
         System.out.println("verifyTitle : current thread id : " + Thread.currentThread().getId());
         System.out.println("==========================");
+
+        MainPageObject mainPageObject = new MainPageObject(driver());
         boolean isTitleGOTDisplayed = mainPageObject.isTitleDisplayed();
         Assert.assertTrue(isTitleGOTDisplayed, ApplicationProperties.WRONG_TITLE);
     }
@@ -98,6 +93,8 @@ public class MainPageTest {
         System.out.println("==========================");
         System.out.println("verifyMainPageHeader : current thread id : " + Thread.currentThread().getId());
         System.out.println("==========================");
+
+        MainPageObject mainPageObject = new MainPageObject(driver());
         boolean isHeaderDisplayed = mainPageObject.isHeaderItemsDisplayed();
         Assert.assertTrue(isHeaderDisplayed, ApplicationProperties.HEADER_IS_NOT_DISPLAYED_PROPERLY);
     }
@@ -110,6 +107,8 @@ public class MainPageTest {
         System.out.println("==========================");
         System.out.println("verifyMainPageCentralImage : current thread id : " + Thread.currentThread().getId());
         System.out.println("==========================");
+
+        MainPageObject mainPageObject = new MainPageObject(driver());
         boolean isFooterDisplayed = mainPageObject.isImageDisplayed();
         Assert.assertTrue(isFooterDisplayed, ApplicationProperties.IMAGE_IS_NOT_DISPLAYED_PROPERLY);
     }
