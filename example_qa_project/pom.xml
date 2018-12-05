@@ -22,6 +22,7 @@
             <artifactId>selenium-java</artifactId>
             <version>3.12.0</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -30,13 +31,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <parallel>methods</parallel>
-                    <threadCount>${threadCount}</threadCount>
-                    <suiteXmlFiles>
-                        testng.xml
-                    </suiteXmlFiles>
+                    <!--<parallel>methods</parallel>-->
+                    <!--<threadCount>${threadCount}</threadCount>-->
+                    <!--<suiteXmlFiles>-->
+                        <!--myTemp.xml-->
+                    <!--</suiteXmlFiles>-->
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>

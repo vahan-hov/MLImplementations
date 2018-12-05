@@ -1,25 +1,54 @@
 package tests;
 
 import common.ApplicationProperties;
+import config.DynamicTestNG;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.MainPageObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class executes tests to ensure the main page of the website works as expected.
  */
 public class MainPageTest {
     private static final ThreadLocal<RemoteWebDriver> drivers = new ThreadLocal<RemoteWebDriver>();
+
+    @BeforeSuite
+    @Parameters({"os", "browser", "browserVersion", "classes","threadCount"})
+    public void setupTestBeforeSuit(String os, String browser, String browserVersion,String classes, int threadCount) throws Exception {
+        System.out.println("Beforesuit ============================================================");
+
+        Map<String, String> params = new HashMap<String, String>();
+
+        String[] browsersArr = browser.split(",");
+        String[] browserVersionsArr = browserVersion.split(",");
+
+        if (browsersArr.length == 1 && browserVersionsArr.length == 1) {
+            params.put("browser", browser);
+            params.put("browserVersion", browserVersion);
+        } else if (browsersArr.length == 2 && browserVersionsArr.length == 2) {
+            params.put("browser1", browsersArr[0]);
+            params.put("browser2", browsersArr[1]);
+            params.put("browserVersion1", browserVersionsArr[0]);
+            params.put("browserVersion2", browserVersionsArr[1]);
+        } else {
+            throw new Exception("Wrong browser configs!");
+        }
+
+        params.put("os",os);
+
+        String[] classesArr = classes.split(",");
+        DynamicTestNG dynamicTestNG = new DynamicTestNG();
+        dynamicTestNG.runTestNGTest(params,classesArr,threadCount);
+    }
 
     /**
      * This method runs before every method and creates a new driver (chrome or firefox) and navigates to the URL of website.
