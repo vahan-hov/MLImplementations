@@ -43,4 +43,8 @@ $ mvn test -Dtest=MainPageTest#verifyMainPageCentralImage -DthreadCount=3 -Dos=L
 
 //Run a group.Only 'smoke' group is present.
 $ mvn test -Dgroups=smoke -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3
+
+//Run with 2 browsers
+$ mvn test -Dclasses=MainPageTest,CastAndCrewPageTest -DthreadCount=2 -Dos=Linux -Dbrowser=firefox,chrome -DbrowserVersion=63.0.3,69.0.3497.100
+
 ```

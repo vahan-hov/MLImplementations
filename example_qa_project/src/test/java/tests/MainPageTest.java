@@ -37,6 +37,7 @@ public class MainPageTest {
         } else if (browsersArr.length == 2 && browserVersionsArr.length == 2) {
             params.put("browser1", browsersArr[0]);
             params.put("browser2", browsersArr[1]);
+
             params.put("browserVersion1", browserVersionsArr[0]);
             params.put("browserVersion2", browserVersionsArr[1]);
         } else {
@@ -47,7 +48,7 @@ public class MainPageTest {
 
         String[] classesArr = classes.split(",");
         DynamicTestNG dynamicTestNG = new DynamicTestNG();
-        dynamicTestNG.runTestNGTest(params,classesArr,threadCount);
+        dynamicTestNG.runTestNGTest(params,classesArr,threadCount).run();
     }
 
     /**
