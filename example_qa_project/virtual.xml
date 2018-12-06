@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" name="MySuite" parallel="methods">
+  <test name="MyTest1">
+    <parameter name="os" value="Linux"/>
+    <parameter name="browser" value="firefox"/>
+    <parameter name="browserVersion" value="63.0.3"/>
+    <classes>
+      <class name="tests.MainPageTest"/>
+      <class name="tests.CastAndCrewPageTest"/>
+    </classes>
+  </test> <!-- MyTest1 -->
+  <test name="MyTest2">
+    <parameter name="os" value="Linux"/>
+    <parameter name="browser" value="chrome"/>
+    <parameter name="browserVersion" value="69.0.3497.100"/>
+    <classes>
+      <class name="tests.MainPageTest"/>
+      <class name="tests.CastAndCrewPageTest"/>
+    </classes>
+  </test> <!-- MyTest2 -->
+</suite> <!-- MySuite -->

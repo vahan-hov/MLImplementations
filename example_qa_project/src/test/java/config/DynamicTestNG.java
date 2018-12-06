@@ -9,19 +9,20 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DynamicTestNG {
-    public void runTestNGTest(Map<String, String> testngParams, String[] classesArr, int threadCount) {   //Create an instance on TestNG
+    public TestNG runTestNGTest(Map<String, String> testngParams, String[] classesArr, int threadCount) {   //Create an instance on TestNG
         TestNG myTestNG = new TestNG();
 
         //Print the parameter values
         for (Map.Entry<String, String> entry : testngParams.entrySet()) {
             System.out.println("====== " + entry.getKey() + " => " + entry.getValue() + " ============================================================");
         }
-        System.out.println("====== thread count "+ threadCount + " ============================================================");
-        for (String className: classesArr) {
+        System.out.println("====== thread count " + threadCount + " ============================================================");
+        for (String className : classesArr) {
             System.out.println("class " + className);
         }
 
@@ -35,21 +36,49 @@ public class DynamicTestNG {
         XmlTest myTest2 = null;
         if (testngParams.containsKey("browser1")) {
 
-            Map<String, String> paramsFor1 = testngParams;
+            Map<String, String> paramsFor1 = new HashMap<String, String>(testngParams);
             paramsFor1.remove("browser2");
             paramsFor1.remove("browserVersion2");
+
+            String browser = testngParams.get("browser1");
+            paramsFor1.put("browser", browser);
+            paramsFor1.remove("browser1");
+
+            String browserVersion = testngParams.get("browserVersion1");
+            paramsFor1.put("browserVersion", browserVersion);
+            paramsFor1.remove("browserVersion1");
 
             myTest = new XmlTest(mySuite);
             myTest.setName("MyTest1");
             myTest.setParameters(paramsFor1);
 
 
-            Map<String, String> paramsFor2 = testngParams;
-            myTest2 = new XmlTest(mySuite);
-            myTest.setName("MyTest2");
+            Map<String, String> paramsFor2 = new HashMap<String, String>(testngParams);
             paramsFor2.remove("browser1");
             paramsFor2.remove("browserVersion1");
+
+            browser = testngParams.get("browser2");
+            paramsFor2.put("browser", browser);
+            paramsFor2.remove("browser2");
+
+            browserVersion = testngParams.get("browserVersion2");
+            paramsFor2.put("browserVersion", browserVersion);
+            paramsFor2.remove("browserVersion2");
+
+            myTest2 = new XmlTest(mySuite);
+            myTest2.setName("MyTest2");
             myTest2.setParameters(paramsFor2);
+
+            System.out.println("results");
+            for (String key : paramsFor1.keySet()) {
+                String value = paramsFor1.get(key);
+                System.out.println(key + " : " + value);
+            }
+
+            for (String key : paramsFor2.keySet()) {
+                String value = paramsFor2.get(key);
+                System.out.println(key + " : " + value);
+            }
 
         } else {
             myTest = new XmlTest(mySuite);
@@ -87,36 +116,28 @@ public class DynamicTestNG {
 
         //Set the list of Suites to the testNG object you created earlier.
         myTestNG.setXmlSuites(mySuites);
-        mySuite.setFileName("myTemp.xml");
+        mySuite.setFileName("virtual.xml");
         mySuite.setThreadCount(threadCount);
-        myTestNG.run();
+//        myTestNG.run();
 
         //Create physical XML file based on the virtual XML content
         for (XmlSuite suite : mySuites) {
             createXmlFile(suite);
         }
         System.out.println("File created successfully.====================================================");
-
-        //Print the parameter values
-        Map<String, String> params = myTest.getParameters();
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            System.out.println("====== " + entry.getKey() + " => " + entry.getValue() + " ============================================================");
-        }
+        return myTestNG;
     }
 
     //This method will create an Xml file based on the XmlSuite data
     private void createXmlFile(XmlSuite mSuite) {
         FileWriter writer;
         try {
-            writer = new FileWriter(new File("myTemp.xml"));
+            writer = new FileWriter(new File("virtual.xml"));
             writer.write(mSuite.toXml());
             writer.flush();
             writer.close();
-            System.out.println(new File("myTemp.xml").getAbsolutePath());
+            System.out.println(new File("virtual.xml").getAbsolutePath());
         } catch (IOException e) {
-            System.out.println("exception ###################################################################################");
-            System.out.println("exception ###################################################################################");
-            System.out.println("exception ###################################################################################");
             System.out.println("exception ###################################################################################");
             e.printStackTrace();
         }
