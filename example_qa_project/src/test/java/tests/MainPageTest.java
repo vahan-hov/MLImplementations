@@ -23,7 +23,7 @@ public class MainPageTest {
 
     @BeforeSuite(alwaysRun = true)
     @Parameters({"os", "browser", "browserVersion", "classes", "threadCount"})
-    public void setupTestBeforeSuit(@Optional String os, @Optional String browser, @Optional String browserVersion, @Optional String classes, @Optional Integer threadCount) {
+    public void setupTestBeforeSuit(@Optional String os, @Optional String browser, @Optional String browserVersion, @Optional String classes, @Optional Integer threadCount) throws Exception {
         if (os == null || browser == null || browserVersion == null || classes == null || threadCount == null) {
             return;
         }
@@ -49,11 +49,7 @@ public class MainPageTest {
             params.put("browserVersion1", browserVersionsArr[0]);
             params.put("browserVersion2", browserVersionsArr[1]);
         } else {
-            try {
-                throw new Exception("Wrong browser configs!");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            throw new Exception("Wrong browser configs!");
         }
 
         params.put("os", os);
