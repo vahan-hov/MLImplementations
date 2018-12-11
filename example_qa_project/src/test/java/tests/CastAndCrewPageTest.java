@@ -6,10 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.CastAndCrewPageObject;
 import pages.MainPageObject;
 
@@ -27,7 +24,7 @@ public class CastAndCrewPageTest {
      */
     @BeforeMethod(alwaysRun = true)
     @Parameters({"os", "browser", "browserVersion"})
-    public void setupTestBeforeMethod(String os, String browser, String browserVersion) throws MalformedURLException {
+    public void setupTestBeforeMethod(@Optional String os,@Optional String browser,@Optional String browserVersion) throws MalformedURLException {
         ChromeOptions chromeOptions = null;
         FirefoxOptions firefoxOptions = null;
         Platform platform = Platform.fromString(os.toUpperCase());

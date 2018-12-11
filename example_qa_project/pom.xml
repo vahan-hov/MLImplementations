@@ -25,17 +25,16 @@
     </dependencies>
 
     <build>
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-surefire-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<suiteXmlFiles>-->
-                        <!--virtual.xml-->
-                    <!--</suiteXmlFiles>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-
-        <!--</plugins>-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <suiteXmlFiles>
+                        virtual.xml
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

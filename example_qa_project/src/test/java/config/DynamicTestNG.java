@@ -14,7 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 public class DynamicTestNG {
-    public TestNG runTestNGTest(Map<String, String> testngParams, String[] classesArr, int threadCount) {   //Create an instance on TestNG
+    public static boolean executed = false;
+
+    public TestNG runTestNGTest(Map<String, String> testngParams, String[] classesArr, int threadCount) {
+        //Create an instance on TestNG
         TestNG myTestNG = new TestNG();
 
         //Print the parameter values
@@ -118,7 +121,6 @@ public class DynamicTestNG {
         myTestNG.setXmlSuites(mySuites);
         mySuite.setFileName("virtual.xml");
         mySuite.setThreadCount(threadCount);
-//        myTestNG.run();
 
         //Create physical XML file based on the virtual XML content
         for (XmlSuite suite : mySuites) {
@@ -142,16 +144,4 @@ public class DynamicTestNG {
             e.printStackTrace();
         }
     }
-
-    //Main Method
-//    public static void main(String args[]) {
-//        config.DynamicTestNG dt = new config.DynamicTestNG();
-//
-//        //This Map can hold your testng Parameters.
-//        Map<String, String> testngParams = new HashMap<String, String>();
-//        testngParams.put("","device1esktop");
-//        testngParams.put("","device2obile");
-//        testngParams.put("","device3ablet");
-//        dt.runTestNGTest(testngParams);
-//    }
 }

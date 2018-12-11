@@ -21,9 +21,17 @@ import java.util.Map;
 public class MainPageTest {
     private static final ThreadLocal<RemoteWebDriver> drivers = new ThreadLocal<RemoteWebDriver>();
 
-    @BeforeSuite
-    @Parameters({"os", "browser", "browserVersion", "classes","threadCount"})
-    public void setupTestBeforeSuit(String os, String browser, String browserVersion,String classes, int threadCount) throws Exception {
+    @BeforeSuite(alwaysRun = true)
+    @Parameters({"os", "browser", "browserVersion", "classes", "threadCount"})
+    public void setupTestBeforeSuit(@Optional String os, @Optional String browser, @Optional String browserVersion, @Optional String classes, @Optional Integer threadCount) {
+        if (os == null || browser == null || browserVersion == null || classes == null || threadCount == null) {
+            return;
+        }
+
+        if (DynamicTestNG.executed) {
+            return;
+        }
+        DynamicTestNG.executed = true;
         System.out.println("Beforesuit ============================================================");
 
         Map<String, String> params = new HashMap<String, String>();
@@ -41,14 +49,19 @@ public class MainPageTest {
             params.put("browserVersion1", browserVersionsArr[0]);
             params.put("browserVersion2", browserVersionsArr[1]);
         } else {
-            throw new Exception("Wrong browser configs!");
+            try {
+                throw new Exception("Wrong browser configs!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
-        params.put("os",os);
+        params.put("os", os);
 
         String[] classesArr = classes.split(",");
         DynamicTestNG dynamicTestNG = new DynamicTestNG();
-        dynamicTestNG.runTestNGTest(params,classesArr,threadCount).run();
+        dynamicTestNG.runTestNGTest(params, classesArr, threadCount);
+        System.exit(0);
     }
 
     /**
@@ -56,7 +69,7 @@ public class MainPageTest {
      */
     @BeforeMethod(alwaysRun = true)
     @Parameters({"os", "browser", "browserVersion"})
-    public void setupTestBeforeMethod(String os, String browser, String browserVersion) throws MalformedURLException {
+    public void setupTestBeforeMethod(@Optional String os, @Optional String browser, @Optional String browserVersion) throws MalformedURLException {
         ChromeOptions chromeOptions = null;
         FirefoxOptions firefoxOptions = null;
         Platform platform = Platform.fromString(os.toUpperCase());
