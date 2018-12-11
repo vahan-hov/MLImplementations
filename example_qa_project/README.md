@@ -23,9 +23,9 @@ The project implements parallel automation testing on '/www.hbo.com' website.
 
  * Navigate to the location of selenium-server-standalone-3.13.0.jar and run the following commands:
 ```bash
-    $ java -jar selenium-server-standalone-3.13.0.jar -role hub
+    $ java -jar selenium-server-standalone-3.13.0.jar -role hub -browserTimeout 60 -cleanUpCycle 3 -sessionTimeout 3
 
-    $ java -jar selenium-server-standalone-3.13.0.jar -role node -hub http://localhost:4444/grid/register
+    $ java -jar selenium-server-standalo-3.13.0.jar -role node -hub http://localhost:4444/grid/register -browserTimeout 60 -cleanUpCycle 3 -sessionTimeout 3
 
 ```
 
