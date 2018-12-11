@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.*;
 import pages.MainPageObject;
 
@@ -22,8 +23,12 @@ public class MainPageTest {
     private static final ThreadLocal<RemoteWebDriver> drivers = new ThreadLocal<RemoteWebDriver>();
 
     @BeforeSuite
-    @Parameters({"os", "browser", "browserVersion", "classes","threadCount"})
-    public void setupTestBeforeSuit(String os, String browser, String browserVersion,String classes, int threadCount) throws Exception {
+    @Parameters({"os", "browser", "browserVersion", "classes", "threadCount", "generate"})
+    public void setupTestBeforeSuit(String os, String browser, String browserVersion, String classes, int threadCount,String generate) throws Exception {
+        if (DynamicTestNG.executed) {
+            return;
+        }
+        DynamicTestNG.executed = true;
         System.out.println("Beforesuit ============================================================");
 
         Map<String, String> params = new HashMap<String, String>();
@@ -44,11 +49,15 @@ public class MainPageTest {
             throw new Exception("Wrong browser configs!");
         }
 
-        params.put("os",os);
+        params.put("os", os);
 
         String[] classesArr = classes.split(",");
         DynamicTestNG dynamicTestNG = new DynamicTestNG();
-        dynamicTestNG.runTestNGTest(params,classesArr,threadCount).run();
+        dynamicTestNG.runTestNGTest(params, classesArr, threadCount);
+        System.out.println("generate " + generate);
+        if (generate.toLowerCase().equals("true")) {
+            throw new SkipException("Exiting program");
+        }
     }
 
     /**

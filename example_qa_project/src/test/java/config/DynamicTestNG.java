@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DynamicTestNG {
+    public static boolean executed = false;
     public TestNG runTestNGTest(Map<String, String> testngParams, String[] classesArr, int threadCount) {   //Create an instance on TestNG
         TestNG myTestNG = new TestNG();
 

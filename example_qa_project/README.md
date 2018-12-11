@@ -45,6 +45,6 @@ $ mvn test -Dtest=MainPageTest#verifyMainPageCentralImage -DthreadCount=3 -Dos=L
 $ mvn test -Dgroups=smoke -DthreadCount=3 -Dos=Linux -Dbrowser=firefox -DbrowserVersion=63.0.3
 
 //Run with 2 browsers
-$ mvn test -Dclasses=MainPageTest,CastAndCrewPageTest -DthreadCount=2 -Dos=Linux -Dbrowser=firefox,chrome -DbrowserVersion=63.0.3,69.0.3497.100
+$ mvn test -Dclasses=MainPageTest,CastAndCrewPageTest -DthreadCount=1 -Dos=Linux -Dbrowser=firefox,chrome -DbrowserVersion=63.0.3,69.0.3497.100 -Dgenerate=false
 
 ```
