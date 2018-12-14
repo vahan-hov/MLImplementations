@@ -113,7 +113,7 @@ public class MainPageTest {
     /**
      * Verify the page title (the one displayed inside browser tab) is displayed.
      */
-    @Test(groups = {"MainPageTest"})
+    @Test(groups = {"MainPageTest", "verifyTitle"})
     public void verifyTitle() {
         System.out.println("==========================");
         System.out.println("verifyTitle : current thread id : " + Thread.currentThread().getId());
@@ -127,7 +127,7 @@ public class MainPageTest {
     /**
      * Verify page header items are is displayed in the main page.
      */
-    @Test(groups = {"smoke", "MainPageTest"})
+    @Test(groups = {"smoke", "MainPageTest", "verifyMainPageHeader"})
     public void verifyMainPageHeader() {
         System.out.println("==========================");
         System.out.println("verifyMainPageHeader : current thread id : " + Thread.currentThread().getId());
@@ -141,7 +141,7 @@ public class MainPageTest {
     /**
      * This case verifies the page central image of the main page is displayed.
      */
-    @Test(groups = {"MainPageTest"})
+    @Test(groups = {"MainPageTest", "verifyMainPageCentralImage"})
     public void verifyMainPageCentralImage() {
         System.out.println("==========================");
         System.out.println("verifyMainPageCentralImage : current thread id : " + Thread.currentThread().getId());

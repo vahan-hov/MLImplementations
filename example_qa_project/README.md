@@ -23,26 +23,24 @@ The project implements parallel automation testing on '/www.hbo.com' website.
 
  * Navigate to the location of selenium-server-standalone-3.13.0.jar and run the following commands:
 ```bash
-    $ java -jar selenium-server-standalone-3.13.0.jar -role hub -browserTimeout 60 -cleanUpCycle 3 -sessionTimeout 3
+    $ java -jar selenium-server-standalone-3.13.0.jar -role hub -browserTimeout 60 -cleanUpCycle 3 -sessionTimeout 30
 
-    $ java -jar selenium-server-standalo-3.13.0.jar -role node -hub http://localhost:4444/grid/register -browserTimeout 60 -cleanUpCycle 3 -sessionTimeout 3
+    $ java -jar selenium-server-standalone-3.13.0.jar -role node -hub http://localhost:4444/grid/register -browserTimeout 60 -cleanUpCycle 3 -sessionTimeout 30
 
 ```
 
 ## Usage
 
 ```
-//run all tests
+//run all tests according to xml file
 $ mvn test
 
-//Run a class
-$ mvn test -Dtest=MainPageTest
-
-//Run a specific case
-$ mvn test -Dtest=MainPageTest#verifyMainPageCentralImage
-
-//Run a group.Only 'smoke' group is present.
+//Run a group (smoke) or class or a single method
 $ mvn test -Dgroups=smoke
+
+$ mvn test -Dgroups=MainPageTest
+
+$ mvn test -Dgroups=verifyMainPageHeader
 
 //Edit testng xml
 $ mvn test -Dclasses=MainPageTest,CastAndCrewPageTest -DthreadCount=1 -Dos=Linux -Dbrowser=firefox,chrome -DbrowserVersion=63.0.3,69.0.3497.100

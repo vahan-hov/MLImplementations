@@ -24,7 +24,7 @@ public class CastAndCrewPageTest {
      */
     @BeforeMethod(alwaysRun = true)
     @Parameters({"os", "browser", "browserVersion"})
-    public void setupTestBeforeMethod(@Optional String os,@Optional String browser,@Optional String browserVersion) throws MalformedURLException {
+    public void setupTestBeforeMethod(@Optional String os, @Optional String browser, @Optional String browserVersion) throws MalformedURLException {
         ChromeOptions chromeOptions = null;
         FirefoxOptions firefoxOptions = null;
         Platform platform = Platform.fromString(os.toUpperCase());
@@ -73,7 +73,7 @@ public class CastAndCrewPageTest {
     /**
      * Verify that actor names are displayed in the 'cst and crew' section of web-page.
      */
-    @Test(groups = {"smoke", "MainPageTest"})
+    @Test(groups = {"smoke", "CastAndCrewPageTest", "verifyActorNames"})
     public void verifyActorNames() {
         System.out.println("==========================");
         System.out.println("verifyActorNames : current thread id : " + Thread.currentThread().getId());
@@ -89,7 +89,7 @@ public class CastAndCrewPageTest {
     /**
      * Verify that header is displayed in the 'cst and crew' section of web-page.
      */
-    @Test(groups = {"MainPageTest"})
+    @Test(groups = {"CastAndCrewPageTest", "verifyHeaderIsDisplayed"})
     public void verifyHeaderIsDisplayed() {
         System.out.println("==========================");
         System.out.println("verifyHeaderIsDisplayed : current thread id : " + Thread.currentThread().getId());
