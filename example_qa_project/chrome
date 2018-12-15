@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MySuite" parallel="methods">
+    <test name="MyTest2" parallel="methods">
+        <parameter name="os" value="Linux"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="browserVersion" value="69.0.3497.100"/>
+        <classes>
+            <class name="tests.MainPageTest"/>
+            <class name="tests.CastAndCrewPageTest"/>
+        </classes>
+    </test> <!-- MyTest2 -->
+</suite> <!-- MySuite -->
