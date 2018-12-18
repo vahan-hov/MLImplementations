@@ -34,15 +34,17 @@ The project implements parallel automation testing on '/www.hbo.com' website.
 
 ```
 //run all tests according to xml file
-$ mvn test
+$ mvn test -DthreadCount=3
 
 //Run a group (smoke) or class or a single method
-
 $ mvn test -Dbrowsers=chrome,firefox -Dgroups=MainPageTest -DthreadCount=3
 
 $ mvn test -Dbrowsers=chrome,firefox -Dgroups=verifyMainPageHeader -DthreadCount=3
 
+//Run a single case on a single browser
+$ mvn test -Dtest=MainPageTest#verifyTitle -Dos=linux -Dbrowser=chrome -DthreadCount=1 -DbrowserVersion=69.0.3497.100
+
 //Edit testng xml
-$ mvn test -Dclasses=MainPageTest,CastAndCrewPageTest -DthreadCount=1 -Dos=Linux -Dbrowser=firefox,chrome -DbrowserVersion=63.0.3,69.0.3497.100
+$ mvn test -Dclasses=MainPageTest,CastAndCrewPageTest -DthreadCount=1 -Dos=Linux -Dbrowsers=firefox,chrome -DbrowserVersion=63.0.3,69.0.3497.100
 
 ```

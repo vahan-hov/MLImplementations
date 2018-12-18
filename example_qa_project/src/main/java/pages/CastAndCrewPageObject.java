@@ -14,10 +14,16 @@ public class CastAndCrewPageObject extends AbstractPage {
 
     private final String castAndCrewPageURL = "https://www.hbo.com/game-of-thrones/cast-and-crew";
 
+    /**
+     * Call parents super method
+     */
     public CastAndCrewPageObject(RemoteWebDriver driver) {
         super(driver);
     }
 
+    /**
+     * Navigate to cast and crew  section of web-page
+     */
     public void navigateToCastAndCrewSection() {
         try {
             driver.get(castAndCrewPageURL);
@@ -28,6 +34,9 @@ public class CastAndCrewPageObject extends AbstractPage {
         }
     }
 
+    /**
+     * Check if actor names are displayed
+     */
     public boolean isActorNamesDisplayed() {
         List<WebElement> names = findElementListByLocator(actorsNames);
         for (WebElement name : names) {

@@ -14,14 +14,23 @@ public class MainPageObject extends AbstractPage {
 
     private final By mainPageImage = By.xpath("/html/body/main/div[2]/div/div/div[1]/div[1]/img[2]");
 
+    /**
+     * Call parents super method
+     */
     public MainPageObject(RemoteWebDriver driver) {
         super(driver);
     }
 
+    /**
+     * Check if title is displayed
+     */
     public boolean isTitleDisplayed() {
         return pageTitle.equals(driver.getTitle());
     }
 
+    /**
+     * Check if header items are displayed
+     */
     public boolean isHeaderItemsDisplayed() {
         List<WebElement> headerItems = findElementListByLocator(mainPageHeader);
         for (WebElement item : headerItems) {
@@ -32,6 +41,9 @@ public class MainPageObject extends AbstractPage {
         return true;
     }
 
+    /**
+     * Check if image is displayed
+     */
     public boolean isImageDisplayed() {
         return findElementByLocator(mainPageImage).isDisplayed();
     }
