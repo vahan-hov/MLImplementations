@@ -65,7 +65,7 @@ public class AbstractPage {
     }
 
     /**
-     *  Find element list on the screen
+     * Find element list on the screen
      */
     protected List<WebElement> findElementListByLocator(By elementBy) {
         waitVisibility(elementBy);

@@ -1,3 +1,5 @@
+from collections import Counter
+
 import bs4 as bs
 import datetime as dt
 import os
@@ -8,12 +10,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import style
 import numpy as np
+from sklearn import svm, neighbors, model_selection as cross_validation
+from sklearn.ensemble import VotingClassifier, RandomForestClassifier
 
 style.use('ggplot')
 
 sp_500_names_pickle = 'sp_500_names.pickle'
 sp500_dir = 'sp_500_prices_dir'
 main_df_csv = 'main_df.csv'
+hm_days = 7
 
 
 def save_sp500_tickers():
@@ -109,7 +114,6 @@ def visualize_sp_500():
 
 
 def process_data_for_labels(ticker):
-    hm_days = 7
     if os.path.exists(f'{main_df_csv}'):
         main_df = pd.read_csv(main_df_csv)
     else:
@@ -118,10 +122,61 @@ def process_data_for_labels(ticker):
     main_df.fillna(0, inplace=True)
 
     for i in range(1, hm_days + 1):
-        main_df[f'{ticker}{i}d'] = (main_df[ticker].shift(-i) - main_df[ticker]) / main_df[ticker]
+        main_df[f'{ticker}_{i}d'] = (main_df[ticker].shift(-i) - main_df[ticker]) / main_df[ticker]
 
     main_df.fillna(0, inplace=True)
     return main_df
 
 
-process_data_for_labels('AMZN')
+# can have major improvements
+def buy_sell_hold(*args):
+    cols = [c for c in args]
+    requirement = 0.02
+    for col in cols:
+        if col > requirement:
+            return 1
+        if col < -requirement:
+            return -1
+    return 0
+
+
+def extract_featuresets(ticker):
+    df = process_data_for_labels(ticker)
+    with open(sp_500_names_pickle, 'rb') as f:
+        tickers = pickle.load(f)
+
+    df[f'{ticker}_target'] = list(map(buy_sell_hold, *[df[f'{ticker}_{i}d'] for i in range(1, hm_days + 1)]))
+    vals = df[f'{ticker}_target'].values.tolist()
+    print('Data spread:', Counter(vals))
+    df.fillna(0, inplace=True)
+    df = df.replace([np.inf, -np.inf], np.nan)
+    df.dropna(inplace=True)
+
+    df_vals = df[[ticker for ticker in tickers]].pct_change()
+    df_vals = df_vals.replace([np.inf, -np.inf], 0)
+    df_vals.fillna(0, inplace=True)
+
+    x = df_vals.values
+    y = df[f'{ticker}_target'].values
+    return x, y, df
+
+
+def do_ml(ticker):
+    x, y, df = extract_featuresets(ticker)
+
+    x_train, x_test, y_train, y_test = cross_validation.train_test_split(x, y, test_size=0.25)
+
+    clf = VotingClassifier([('lsvc', svm.LinearSVC()),
+                            ('knn', neighbors.KNeighborsClassifier()),
+                            ('rfor', RandomForestClassifier())])
+
+    clf.fit(x_train, y_train)
+    confidence = clf.score(x_test, y_test)
+    print('accuracy:', confidence)
+    predictions = clf.predict(x_test)
+    print('predicted class counts:', Counter(predictions))
+    return confidence
+
+
+# examples of running:
+do_ml('AMZN')
