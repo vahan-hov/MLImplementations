@@ -8,7 +8,7 @@
         <parameter name="browserVersion" value="69.0.3497.100"/>
         <classes>
             <class name="tests.MainPageTest"/>
-            <class name="tests.CastAndCrewPageTest"/>
+            <class name="tests.SeriesPageTest"/>
         </classes>
     </test> <!-- MyTest2 -->
 </suite> <!-- MySuite -->

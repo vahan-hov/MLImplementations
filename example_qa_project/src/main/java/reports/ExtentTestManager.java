@@ -23,7 +23,7 @@ public class ExtentTestManager {
         startTest(testName, "");
     }
 
-    public static synchronized void startTest(String testName, String desc) {
+    private static synchronized void startTest(String testName, String desc) {
         ExtentTest test = extent.startTest(testName, desc);
         extentTestMap.put((int) (long) (Thread.currentThread().getId()), test);
     }

@@ -1,10 +1,15 @@
 package tests;
 
+import com.relevantcodes.extentreports.LogStatus;
 import common.ApplicationProperties;
 import common.BaseClass;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.MainPageObject;
+import reports.ExtentTestManager;
+
+import java.lang.reflect.Method;
+
+import static common.ApplicationProperties.*;
 
 /**
  * This class executes tests to ensure the main page of the website works as expected.
@@ -12,40 +17,28 @@ import pages.MainPageObject;
 public class MainPageTest extends BaseClass {
 
     /**
-     * Verify the page title (the one displayed inside browser tab) is displayed.
+     * Verify page header items are is displayed in the main page.
      */
-    @Test(groups = {"MainPageTest", "verifyTitle"})
-    public void verifyTitle() {
-        System.out.println("\nverifyTitle : current thread id : " + Thread.currentThread().getId() + "\n");
+    @Test(groups = {SMOKE, MAIN_PAGE_TEST, VERIFY_MAIN_PAGE_SECTIONS_TEST})
+    public void verifyMainPageSectionsTest(Method method) {
+        System.out.println("\n ========== Executing " + method.getDeclaringClass() + " " + method.getName() + ": current thread id : " + Thread.currentThread().getId() + " ==========\n");
 
-        MainPageObject mainPageObject = new MainPageObject(driver());
-        boolean isTitleGOTDisplayed = mainPageObject.isTitleDisplayed();
-        Assert.assertTrue(isTitleGOTDisplayed, ApplicationProperties.WRONG_TITLE);
+        boolean isMainPageSectionsAreDisplayed = mainPageObject.isMainPageSectionsAreDisplayed();
+        Assert.assertTrue(isMainPageSectionsAreDisplayed, ApplicationProperties.MAIN_PAGE_SECTIONS_ARE_NOT_DISPLAYED);
+        ExtentTestManager.getTest().log(LogStatus.INFO, ApplicationProperties.VERIFY_SECTIONS_ARE_DISPLAYED);
+
     }
 
     /**
      * Verify page header items are is displayed in the main page.
      */
-    @Test(groups = {"smoke", "MainPageTest", "verifyMainPageHeader"})
-    public void verifyMainPageHeader() {
-        System.out.println("\nverifyMainPageHeader : current thread id : " + Thread.currentThread().getId() + "\n");
+    @Test(groups = {SMOKE, MAIN_PAGE_TEST, VERIFY_MAIN_PAGE_HEADER_TEST})
+    public void verifyMainPageHeaderTest(Method method) {
+        System.out.println("\n ========== Executing " + method.getDeclaringClass() + " " + method.getName() + ": current thread id : " + Thread.currentThread().getId() + " ==========\n");
 
-        MainPageObject mainPageObject = new MainPageObject(driver());
-        boolean isHeaderDisplayed = mainPageObject.isHeaderItemsDisplayed();
-        Assert.assertTrue(isHeaderDisplayed, ApplicationProperties.HEADER_IS_NOT_DISPLAYED_PROPERLY);
-    }
+        boolean isHeaderDisplayed = mainPageObject.isMainPageHeaderItemsAreDisplayed();
+        Assert.assertTrue(isHeaderDisplayed, ApplicationProperties.MAIN_PAGE_HEADER_ITEMS_ARE_NOT_DISPLAYED);
+        ExtentTestManager.getTest().log(LogStatus.INFO, ApplicationProperties.VERIFY_HEADER_IS_DISPLAYED);
 
-    /**
-     * This case verifies the page central image of the main page is displayed.
-     */
-    @Test(groups = {"MainPageTest", "verifyMainPageCentralImage"})
-    public void verifyMainPageCentralImage() {
-        System.out.println("\nverifyMainPageCentralImage : current thread id : " + Thread.currentThread().getId() + "\n");
-
-        MainPageObject mainPageObject = new MainPageObject(driver());
-        boolean isFooterDisplayed = mainPageObject.isImageDisplayed();
-        Assert.assertTrue(isFooterDisplayed, ApplicationProperties.IMAGE_IS_NOT_DISPLAYED_PROPERLY);
-
-        Assert.fail();
     }
 }

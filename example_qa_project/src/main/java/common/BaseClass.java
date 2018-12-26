@@ -1,13 +1,20 @@
 package common;
 
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import pages.MainPageObject;
+import pages.SeriesPageObject;
 import reports.ExtentManager;
 import reports.ExtentTestManager;
 
@@ -18,10 +25,12 @@ import java.util.Arrays;
 
 public class BaseClass extends TestListenerAdapter {
     private static final ThreadLocal<RemoteWebDriver> drivers = new ThreadLocal<RemoteWebDriver>();
-
-    protected static RemoteWebDriver driver() {
+    private static RemoteWebDriver driver() {
         return drivers.get();
     }
+
+    protected MainPageObject mainPageObject;
+    protected SeriesPageObject seriesPageObject;
 
     /**
      * This method runs before every method and creates a new driver (chrome or firefox) and navigates to the URL of website.
@@ -30,6 +39,7 @@ public class BaseClass extends TestListenerAdapter {
     @Parameters({"os", "browser", "browserVersion"})
     public void setupTestBeforeMethod(@Optional String os, @Optional String browser, @Optional String browserVersion, Method method) throws MalformedURLException {
         System.out.println("BeforeMethod ============================");
+
         ChromeOptions chromeOptions = null;
         FirefoxOptions firefoxOptions = null;
         Platform platform = Platform.fromString(os.toUpperCase());
@@ -54,6 +64,9 @@ public class BaseClass extends TestListenerAdapter {
         drivers.set(driver);
         driver().navigate().to(ApplicationProperties.webPageURL);
         ExtentTestManager.startTest(method.getName());
+
+        mainPageObject = new MainPageObject(driver());
+        seriesPageObject = new SeriesPageObject(driver());
     }
 
     /**
@@ -61,14 +74,23 @@ public class BaseClass extends TestListenerAdapter {
      */
     @AfterMethod(alwaysRun = true)
     public void afterMethod(ITestResult result) {
+        ExtentTestManager.getTest().setDescription("Testing on browser: "+driver().getCapabilities().getBrowserName());
         if (result.isSuccess()) {
             ExtentTestManager.getTest().log(LogStatus.PASS, "Test passed");
         } else if (result.getStatus() == ITestResult.FAILURE) {
             ExtentTestManager.getTest().log(LogStatus.FAIL, "Test failed");
             ExtentTestManager.getTest().log(LogStatus.FAIL, result.getThrowable());
+            String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) driver()).
+                    getScreenshotAs(OutputType.BASE64);
+            ExtentTestManager.getTest().log(LogStatus.FAIL, "Test Failed",
+                    ExtentTestManager.getTest().addBase64ScreenShot(base64Screenshot));
         } else if (result.getStatus() == ITestResult.SKIP) {
             ExtentTestManager.getTest().log(LogStatus.SKIP, "Test skipped");
             ExtentTestManager.getTest().setDescription(Arrays.toString(result.getThrowable().getStackTrace()));
+            String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) driver()).
+                    getScreenshotAs(OutputType.BASE64);
+            ExtentTestManager.getTest().log(LogStatus.FAIL, "Test Failed",
+                    ExtentTestManager.getTest().addBase64ScreenShot(base64Screenshot));
         }
 
         ExtentTestManager.endTest();
@@ -76,10 +98,5 @@ public class BaseClass extends TestListenerAdapter {
 
         RemoteWebDriver driver = driver();
         driver.quit();
-    }
-
-    @AfterSuite(alwaysRun = true)
-    public void afterSuite() {
-        ExtentManager.getInstance().flush();
     }
 }
