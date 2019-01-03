@@ -1,56 +1,108 @@
 package tests;
 
 import com.relevantcodes.extentreports.LogStatus;
-import common.ApplicationProperties;
-import common.BaseClass;
+import common.BaseTest;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.BasePageObject;
+import pages.SeriesPageObject;
 import reports.ExtentTestManager;
 
 import java.lang.reflect.Method;
 
-import static common.ApplicationProperties.*;
-
-/**
- * Class verifies that series page is working as expected.
- */
-public class SeriesPageTest extends BaseClass {
+public class SeriesPageTest extends BaseTest {
 
     /**
-     * Verify page header items are is displayed in the series page.
+     * Verify page main sections are displayed in the series page.
      */
-    @Test(groups = {SERIES_PAGE_TEST, VERIFY_MAIN_PAGE_SECTIONS_TEST})
-    public void verifyMainPageSectionsTest(Method method) throws InterruptedException {
+    @Test(groups = {"SeriesPageTest", "verifyMainPageSectionsSeriesPageTest"})
+    public void verifyMainPageSectionsSeriesPageTest(Method method) {
         System.out.println("\n ========== Executing " + method.getDeclaringClass() + " " + method.getName() + ": current thread id : " + Thread.currentThread().getId() + " ==========\n");
+
+        SeriesPageObject seriesPageObject = new SeriesPageObject(driver());
+        BasePageObject basePageObject = new BasePageObject(driver());
+
+        By discoverTheLatest = seriesPageObject.getDiscoverTheLatest();
+        By popularSearches = seriesPageObject.getPopularSearches();
+        By essentialSeries = seriesPageObject.getEssentialSeries();
 
         seriesPageObject.navigateToSeriesSection();
 
-        boolean isSeriesSectionDefaultViewPresent = seriesPageObject.isSeriesSectionDefaultViewPresent();
-        Assert.assertTrue(isSeriesSectionDefaultViewPresent, ApplicationProperties.SERIES_SECTION_DEFAULT_VIEW_IS_NOT_PRESENT);
-        ExtentTestManager.getTest().log(LogStatus.INFO, ApplicationProperties.VERIFY_SERIES_SECTION_DEFAULT_VIEW_IS_PRESENT);
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(discoverTheLatest), "'discoverTheLatest' is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'discoverTheLatest' is displayed");
+
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(popularSearches), "'popularSearches' is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'popularSearches' is displayed");
+
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(essentialSeries), "'essentialSeries' is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'essentialSeries' is displayed");
     }
 
     /**
-     * Verify series page sections are displayed.
+     * Verify 'about' tab of series section is displayed properly.
      */
-    @Test(groups = {SMOKE, SERIES_PAGE_TEST, VERIFY_SERIES_PAGE_SECTIONS_TEST})
-    public void verifySeriesPageSectionsTest(Method method) {
+    @Test(groups = {"smoke", "SeriesPageTest", "verifyAboutTabOfSeriesPageTest"})
+    public void verifyAboutTabOfSeriesPageTest(Method method) {
         System.out.println("\n ========== Executing " + method.getDeclaringClass() + " " + method.getName() + ": current thread id : " + Thread.currentThread().getId() + " ==========\n");
+
+        SeriesPageObject seriesPageObject = new SeriesPageObject(driver());
+        BasePageObject basePageObject = new BasePageObject(driver());
+
+        By discoverTheLatestList = seriesPageObject.getDiscoverTheLatestList();
+        By aboutDiscoverItemHeader = seriesPageObject.getAboutDiscoverItemHeader();
+        By castAndCrewDiscoverItemHeader = seriesPageObject.getCastAndCrewDiscoverItemHeader();
+        By shopDiscoverItemHeader = seriesPageObject.getShopDiscoverItemHeader();
+        By selectYourSeason = seriesPageObject.getSelectYourSeason();
 
         seriesPageObject.navigateToSeriesSection();
 
-        boolean isDiscoverLatestItemsDisplayed = seriesPageObject.isDiscoverLatestItemsDisplayed();
-        Assert.assertTrue(isDiscoverLatestItemsDisplayed, ApplicationProperties.DISCOVER_LATEST_ITEMS_NOT_DISPLAYED);
-        ExtentTestManager.getTest().log(LogStatus.INFO, ApplicationProperties.VERIFY_DISCOVER_LATEST_ITEMS_ARE_DISPLAYED);
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(discoverTheLatestList, 4), "'discoverTheLatestList' is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'discoverTheLatestList' is displayed");
 
         seriesPageObject.selectItemInDiscoverItemSection();
 
-        boolean isDiscoverItemHeaderDisplayed = seriesPageObject.isDiscoverItemHeaderDisplayed();
-        Assert.assertTrue(isDiscoverItemHeaderDisplayed, ApplicationProperties.DISCOVER_LATEST_ITEMS_HEADER_NOT_DISPLAYED);
-        ExtentTestManager.getTest().log(LogStatus.INFO, ApplicationProperties.VERIFY_DISCOVER_LATEST_ITEMS_HEADER_IS_DISPLAYED);
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(aboutDiscoverItemHeader), "'aboutDiscoverItemHeader' is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'aboutDiscoverItemHeader' is displayed");
 
-        boolean isSelectSeasonDisplayed = seriesPageObject.isSelectSeasonDisplayed();
-        Assert.assertTrue(isSelectSeasonDisplayed, ApplicationProperties.SELECT_YOUR_SEASON_NOT_DISPLAYED);
-        ExtentTestManager.getTest().log(LogStatus.INFO, ApplicationProperties.VERIFY_SELECT_YOUR_SEASON_IS_DISPLAYED);
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(castAndCrewDiscoverItemHeader), "'castAndCrewDiscoverItemHeader' is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'castAndCrewDiscoverItemHeader' is displayed");
+
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(shopDiscoverItemHeader), "'shopDiscoverItemHeader' is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'shopDiscoverItemHeader' is displayed");
+
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(selectYourSeason), "'selectYourSeason' is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'selectYourSeason' is displayed");
+    }
+
+    /**
+     * Verify 'popular searches' tab of series section is displayed properly.
+     */
+    @Test(groups = {"smoke", "SeriesPageTest", "verifyPopularSearchesSectionOfSeriesPageTest"})
+    public void verifyPopularSearchesSectionOfSeriesPageTest(Method method) throws InterruptedException {
+        System.out.println("\n ========== Executing " + method.getDeclaringClass() + " " + method.getName() + ": current thread id : " + Thread.currentThread().getId() + " ==========\n");
+
+        SeriesPageObject seriesPageObject = new SeriesPageObject(driver());
+        BasePageObject basePageObject = new BasePageObject(driver());
+
+        By popularSearches = seriesPageObject.getPopularSearches();
+        By popularSearchesList = seriesPageObject.getPopularSearchesList();
+        By popularItemHeader = seriesPageObject.getPopularItemHeader();
+        By popularItemDetail = seriesPageObject.getPopularItemDetail();
+
+        seriesPageObject.navigateToSeriesSection();
+
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(popularSearches), "'popularSearches' is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'popularSearches' is displayed");
+
+        basePageObject.clickOnRandomItemInList(popularSearchesList, 5);
+        Assert.assertTrue(seriesPageObject.isUserHasLeftSeriesSection(), "Could not choose 'popular searches' item");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Click on'popular searches' item");
+
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(popularItemHeader), "'popularItemHeader' item is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'popularItemHeader' item is displayed");
+
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(popularItemDetail), "'popularItemDetail' item is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'popularItemDetail' item is displayed");
     }
 }

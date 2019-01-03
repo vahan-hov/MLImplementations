@@ -118,4 +118,11 @@ public class AbstractPage {
     List<WebElement> findElementListByLocator(By elementBy) {
         return driver.findElements(elementBy);
     }
+
+    /**
+     * Get URL of current page
+     */
+    String getCurrentURL() {
+        return driver.getCurrentUrl();
+    }
 }

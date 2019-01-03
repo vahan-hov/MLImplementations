@@ -4,6 +4,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import common.ApplicationProperties;
 
 public class ExtentManager {
+
     private static ExtentReports report;
 
     public static synchronized ExtentReports getInstance() {

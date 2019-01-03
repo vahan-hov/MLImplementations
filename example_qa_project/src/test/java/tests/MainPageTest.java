@@ -1,44 +1,51 @@
 package tests;
 
 import com.relevantcodes.extentreports.LogStatus;
-import common.ApplicationProperties;
-import common.BaseClass;
+import common.BaseTest;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.BasePageObject;
+import pages.MainPageObject;
 import reports.ExtentTestManager;
 
 import java.lang.reflect.Method;
 
-import static common.ApplicationProperties.*;
-
-/**
- * This class executes tests to ensure the main page of the website works as expected.
- */
-public class MainPageTest extends BaseClass {
+public class MainPageTest extends BaseTest {
 
     /**
-     * Verify page header items are is displayed in the main page.
+     * Verify main page main sections are displayed properly.
      */
-    @Test(groups = {SMOKE, MAIN_PAGE_TEST, VERIFY_MAIN_PAGE_SECTIONS_TEST})
+    @Test(groups = {"smoke", "MainPageTest", "verifyMainPageSectionsTest"})
     public void verifyMainPageSectionsTest(Method method) {
         System.out.println("\n ========== Executing " + method.getDeclaringClass() + " " + method.getName() + ": current thread id : " + Thread.currentThread().getId() + " ==========\n");
 
-        boolean isMainPageSectionsAreDisplayed = mainPageObject.isMainPageSectionsAreDisplayed();
-        Assert.assertTrue(isMainPageSectionsAreDisplayed, ApplicationProperties.MAIN_PAGE_SECTIONS_ARE_NOT_DISPLAYED);
-        ExtentTestManager.getTest().log(LogStatus.INFO, ApplicationProperties.VERIFY_SECTIONS_ARE_DISPLAYED);
+        MainPageObject mainPageObject = new MainPageObject(driver());
+        BasePageObject basePageObject = new BasePageObject(driver());
 
+        By hereBeforeYouKnowIt = mainPageObject.getHereBeforeYouKnowIt();
+        By inHBONews = mainPageObject.getInHBONews();
+
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(hereBeforeYouKnowIt), "'hereBeforeYouKnowIt' is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'hereBeforeYouKnowIt' is displayed");
+
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(inHBONews), "'inHBONews' is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'inHBONews' is displayed");
     }
 
     /**
      * Verify page header items are is displayed in the main page.
      */
-    @Test(groups = {SMOKE, MAIN_PAGE_TEST, VERIFY_MAIN_PAGE_HEADER_TEST})
+    @Test(groups = {"smoke", "MainPageTest", "verifyMainPageHeaderTest"})
     public void verifyMainPageHeaderTest(Method method) {
         System.out.println("\n ========== Executing " + method.getDeclaringClass() + " " + method.getName() + ": current thread id : " + Thread.currentThread().getId() + " ==========\n");
 
-        boolean isHeaderDisplayed = mainPageObject.isMainPageHeaderItemsAreDisplayed();
-        Assert.assertTrue(isHeaderDisplayed, ApplicationProperties.MAIN_PAGE_HEADER_ITEMS_ARE_NOT_DISPLAYED);
-        ExtentTestManager.getTest().log(LogStatus.INFO, ApplicationProperties.VERIFY_HEADER_IS_DISPLAYED);
+        MainPageObject mainPageObject = new MainPageObject(driver());
+        BasePageObject basePageObject = new BasePageObject(driver());
 
+        By headerItemsList = mainPageObject.getHeaderItemsList();
+
+        Assert.assertTrue(basePageObject.verifyElementByIsDisplayed(headerItemsList), "'headerItemsList' is not displayed");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "Verify 'headerItemsList' is displayed");
     }
 }

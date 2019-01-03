@@ -13,8 +13,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-import pages.MainPageObject;
-import pages.SeriesPageObject;
 import reports.ExtentManager;
 import reports.ExtentTestManager;
 
@@ -23,17 +21,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 
-public class BaseClass extends TestListenerAdapter {
+public class BaseTest extends TestListenerAdapter {
     private static final ThreadLocal<RemoteWebDriver> drivers = new ThreadLocal<RemoteWebDriver>();
-    private static RemoteWebDriver driver() {
+
+    protected static RemoteWebDriver driver() {
         return drivers.get();
     }
 
-    protected MainPageObject mainPageObject;
-    protected SeriesPageObject seriesPageObject;
-
     /**
-     * This method runs before every method and creates a new driver (chrome or firefox) and navigates to the URL of website.
+     * This method runs before every test method and creates a new driver (chrome or firefox) and navigates to the URL of website.
      */
     @BeforeMethod(alwaysRun = true)
     @Parameters({"os", "browser", "browserVersion"})
@@ -64,9 +60,6 @@ public class BaseClass extends TestListenerAdapter {
         drivers.set(driver);
         driver().navigate().to(ApplicationProperties.webPageURL);
         ExtentTestManager.startTest(method.getName());
-
-        mainPageObject = new MainPageObject(driver());
-        seriesPageObject = new SeriesPageObject(driver());
     }
 
     /**
@@ -74,7 +67,7 @@ public class BaseClass extends TestListenerAdapter {
      */
     @AfterMethod(alwaysRun = true)
     public void afterMethod(ITestResult result) {
-        ExtentTestManager.getTest().setDescription("Testing on browser: "+driver().getCapabilities().getBrowserName());
+        ExtentTestManager.getTest().setDescription("Testing on browser: " + driver().getCapabilities().getBrowserName());
         if (result.isSuccess()) {
             ExtentTestManager.getTest().log(LogStatus.PASS, "Test passed");
         } else if (result.getStatus() == ITestResult.FAILURE) {

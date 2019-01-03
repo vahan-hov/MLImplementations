@@ -9,24 +9,17 @@ import java.util.List;
 public class SeriesPageObject extends AbstractPage {
 
     private final By seriesSection = By.xpath("//a[text() = 'Series']");
-
-    private final WebElement seriesSectionElement = findElementListByLocator(seriesSection).get(0);
-
     private final By discoverTheLatest = By.xpath("//*[text() = 'Discover the Latest']");
-
     private final By popularSearches = By.xpath("//*[text() = 'Popular Searches']");
-
     private final By essentialSeries = By.xpath("//*[text() = 'Essential Series']");
-
     private final By discoverTheLatestList = By.xpath("//*[@class = 'components/CardImage--imageContainer']");
-
     private final By aboutDiscoverItemHeader = By.xpath("//a[text()='About']");
-
     private final By castAndCrewDiscoverItemHeader = By.xpath("//a[text()='Cast & Crew']");
-
     private final By shopDiscoverItemHeader = By.xpath("//a[text()='SHOP']");
-
     private final By selectYourSeason = By.xpath("//*[text()='Select Your Season']");
+    private final By popularSearchesList = By.xpath("//*[@class = 'components/CollectionItem--container']//div[@class='components/Thumbnail--thumbnail components/Thumbnail--landscape components/Thumbnail--large components/CollectionItem--thumbnailImage']");
+    private final By popularItemHeader = By.xpath("//*[@class = 'components/Header--strongTitle']");
+    private final By popularItemDetail = By.xpath("//*[@class = 'modules/Article--externalHtmlContainer modules/Article--heavyHeader modules/Article--articleContent']");
 
     /**
      * Call parents super method
@@ -35,40 +28,62 @@ public class SeriesPageObject extends AbstractPage {
         super(driver);
     }
 
+    public By getSeriesSection() {
+        return seriesSection;
+    }
+
+    public By getDiscoverTheLatest() {
+        return discoverTheLatest;
+    }
+
+    public By getPopularSearches() {
+        return popularSearches;
+    }
+
+    public By getEssentialSeries() {
+        return essentialSeries;
+    }
+
+    public By getDiscoverTheLatestList() {
+        return discoverTheLatestList;
+    }
+
+    public By getAboutDiscoverItemHeader() {
+        return aboutDiscoverItemHeader;
+    }
+
+    public By getCastAndCrewDiscoverItemHeader() {
+        return castAndCrewDiscoverItemHeader;
+    }
+
+    public By getShopDiscoverItemHeader() {
+        return shopDiscoverItemHeader;
+    }
+
+    public By getSelectYourSeason() {
+        return selectYourSeason;
+    }
+
+    public By getPopularSearchesList() {
+        return popularSearchesList;
+    }
+
+    public By getPopularItemHeader() {
+        return popularItemHeader;
+    }
+
+    public By getPopularItemDetail() {
+        return popularItemDetail;
+    }
+
     /**
      * Navigate to series section
      */
     public void navigateToSeriesSection() {
+        WebElement seriesSectionElement = findElementListByLocator(seriesSection).get(0);
         waitVisibility(seriesSectionElement);
         click(seriesSectionElement);
         waitVisibility(discoverTheLatest);
-    }
-
-    /**
-     * Check if series sections default view is present
-     */
-    public boolean isSeriesSectionDefaultViewPresent() throws InterruptedException {
-        Thread.sleep(5000);
-        waitVisibility(findElementListByLocator(discoverTheLatest));
-        WebElement discoverTheLatestElement = findElementListByLocator(discoverTheLatest).get(0);
-        WebElement popularSearchesElement = findElementListByLocator(popularSearches).get(0);
-        WebElement essentialSeriesElement = findElementListByLocator(essentialSeries).get(0);
-        return discoverTheLatestElement.isDisplayed() &&
-                popularSearchesElement.isDisplayed() &&
-                essentialSeriesElement.isDisplayed();
-    }
-
-    /**
-     * Check if discover latest items are displayed
-     */
-    public boolean isDiscoverLatestItemsDisplayed() {
-        List<WebElement> items = findElementListByLocator(discoverTheLatestList);
-        for (int i = 0; i < 4; ++i) {
-            if (!items.get(i).isDisplayed()) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -79,26 +94,9 @@ public class SeriesPageObject extends AbstractPage {
         click(items.get(0));
     }
 
-    /**
-     * Check if discover item header is displayed
-     */
-    public boolean isDiscoverItemHeaderDisplayed() {
-        WebElement aboutDiscoverItemHeaderElement = findElementListByLocator(aboutDiscoverItemHeader).get(0);
-        WebElement castAndCrewDiscoverItemHeaderElement = findElementListByLocator(castAndCrewDiscoverItemHeader).get(0);
-        WebElement shopDiscoverItemHeaderElement = findElementListByLocator(shopDiscoverItemHeader).get(0);
-        return aboutDiscoverItemHeaderElement.isDisplayed() &&
-                castAndCrewDiscoverItemHeaderElement.isDisplayed() &&
-                shopDiscoverItemHeaderElement.isDisplayed();
-    }
-
-    /**
-     * Check if select season is displayed
-     */
-    public boolean isSelectSeasonDisplayed() {
-        return findElementByLocatorAndCheckIsDisplayed(selectYourSeason);
-    }
-
-    public boolean isSectionsDisplayed() {
-        return findElementByLocatorAndCheckIsDisplayed(discoverTheLatest);
+    public boolean isUserHasLeftSeriesSection() throws InterruptedException {
+        Thread.sleep(2000);
+        String seriesPageURL = "https://www.hbo.com/series";
+        return !getCurrentURL().equals(seriesPageURL);
     }
 }
