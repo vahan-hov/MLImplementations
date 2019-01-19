@@ -59,3 +59,19 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
+# NB
+test_train_folder
+
+#OpenCV
+opencv-3.1.0
+cascades
+data
+info
+*.jpg
+neg
+pos
+uglies
+*.vec
+
+
