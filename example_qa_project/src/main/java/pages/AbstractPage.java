@@ -8,15 +8,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * This page contains main functionalities used in all other pages
  */
 public class AbstractPage {
 
-    private WebDriverWait wait;
-
-    private RemoteWebDriver driver;
+    private final WebDriverWait wait;
+    private final RemoteWebDriver driver;
 
     /**
      * Initialize driver
@@ -79,6 +79,9 @@ public class AbstractPage {
         return driver.findElement(elementBy).getText();
     }
 
+    /**
+     * Scroll until element is visible
+     */
     protected void scrollIntoElement(WebElement element) {
         Actions actions = new Actions(driver);
         actions.moveToElement(element);
@@ -106,7 +109,6 @@ public class AbstractPage {
     /**
      * Find element by locator and click
      */
-
     protected void findElementByLocatorAndClick(By elementBy) {
         waitVisibility(elementBy);
         driver.findElement(elementBy).click();
@@ -124,5 +126,42 @@ public class AbstractPage {
      */
     String getCurrentURL() {
         return driver.getCurrentUrl();
+    }
+
+    /**
+     * Check if a given list has given number of elements displayed.
+     */
+    public boolean verifyElementByIsDisplayed(By elementBy, Integer count) {
+        List<WebElement> items = findElementListByLocator(elementBy);
+        if (null == count) {
+            count = items.size();
+        }
+
+        for (int i = 0; i < count; ++i) {
+            if (!items.get(i).isDisplayed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Check if a given list's first element is displayed.
+     */
+    public boolean verifyElementByIsDisplayed(By elementBy) {
+        WebElement element = findElementListByLocator(elementBy).get(0);
+        return element.isDisplayed();
+    }
+
+    /**
+     * Click on a random element of a given list.
+     */
+    public void clickOnRandomItemInList(By elementBy, Integer maxRange) {
+        List<WebElement> items = findElementListByLocator(elementBy);
+        if (null == maxRange || maxRange > items.size()) {
+            maxRange = items.size();
+        }
+        int rand = new Random().nextInt(maxRange);
+        click(items.get(rand));
     }
 }

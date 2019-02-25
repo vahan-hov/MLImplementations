@@ -9,7 +9,6 @@ import java.util.Map;
 public class ExtentTestManager {
 
     private static Map<Integer, ExtentTest> extentTestMap = new HashMap<Integer, ExtentTest>();
-
     private static ExtentReports extent = ExtentManager.getInstance();
 
     public static synchronized ExtentTest getTest() {
