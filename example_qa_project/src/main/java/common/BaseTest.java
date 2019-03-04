@@ -9,13 +9,11 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import reports.ExtentManager;
 import reports.ExtentTestManager;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -26,6 +24,19 @@ public class BaseTest extends TestListenerAdapter {
 
     protected static RemoteWebDriver driver() {
         return drivers.get();
+    }
+
+    /**
+     * This method runs before every test class and clears cache before each class. .
+     */
+    @BeforeClass(alwaysRun = true)
+    public void clearCacheBeforeClass() {
+        try {
+            Runtime.getRuntime().exec(new String[]{"bash", "-c", "rm -rf /tmp/.com.google.Chrome*"});
+            Runtime.getRuntime().exec(new String[]{"bash", "-c", "rm -rf /tmp/.org.chromium.Chromium*"});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
