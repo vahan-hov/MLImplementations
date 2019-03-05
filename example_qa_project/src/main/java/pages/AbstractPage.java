@@ -150,6 +150,7 @@ public class AbstractPage {
      */
     public boolean verifyElementByIsDisplayed(By elementBy) {
         WebElement element = findElementListByLocator(elementBy).get(0);
+        waitVisibility(element);
         return element.isDisplayed();
     }
 

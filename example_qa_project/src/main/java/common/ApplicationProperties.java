@@ -4,7 +4,6 @@ public class ApplicationProperties {
 
     //Paths, names
     static final String webPageURL = "https://www.hbo.com";
-    static final String LOCALHOST_URL = "http://localhost:4444/wd/hub";
     static final String PLATFORM_STRING = "platform";
     static final String CHROME_STRING = "chrome";
     static final String FIREFOX_STRING = "firefox";

@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class GameOfThronesPageObject extends AbstractPage {
 
-    private final By gameOfThronesFromEssentials = By.xpath("//div[text()='Game of Thrones']");
+    private final By gameOfThronesFromEssentials = By.xpath("/html/body/main/div[6]/div/div/div[1]/section/div/div/div/div[1]/a/div[1]/img");
     private final By castAndCrewSection = By.xpath("//a[text()='cast & crew']");
     private final By castAndCrewSectionItemsList = By.xpath("//div[@class='components/ThumbnailWithText--container']");
     private final By itemsTitle = By.xpath("//h2[@class='components/Header--strongTitle']");
@@ -44,7 +44,6 @@ public class GameOfThronesPageObject extends AbstractPage {
      */
     public void selectGOT() {
         WebElement item = findElementListByLocator(gameOfThronesFromEssentials).get(0);
-        waitVisibility(item);
         click(item);
     }
 
