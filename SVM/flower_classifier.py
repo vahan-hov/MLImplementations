@@ -81,11 +81,10 @@ def fit(xs, ys, w, max_iter=5000, precision=0.1, lr=0.1):
                 norm_w = np.matmul(w, w.T)
                 magnitude_diff = norm_w - norm_w_prev
                 grad = 2 * w
-
+		
                 if abs(magnitude_diff) >= precision:
                     w += grad * -lr
                     norm_w_prev = norm_w
-                    continue
                 print(f'Optimized the model in {i} and {j}  steps .Weights are: {w}. Norm diff {norm_w - norm_w_prev}')
                 return w
 
