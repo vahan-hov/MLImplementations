@@ -2,6 +2,10 @@
 
 It's my first deep learning project. I use neural networks from keras and opencv library to recognize some of the human hand gestures. Images are taken directly from your camera. 
 
+# Quick Demo
+
+![demo](https://user-images.githubusercontent.com/37872230/55979620-ac33a080-5ca3-11e9-9f41-8eb8a15e7030.gif)
+
 # Getting started
 Clone the project
 ## Installings
