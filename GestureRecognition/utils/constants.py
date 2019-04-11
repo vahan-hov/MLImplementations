@@ -1,0 +1,9 @@
+IMAGE_SIZE = 50
+NEW_GESTURE = 'peace'
+DATA_FOLDER = 'data'
+RES_FOLDER = 'resources'
+MAX_NUM_OF_IMAGES = 1000
+MODEL_NAME = 'gestures.model'
+MODEL_PATH = f'{RES_FOLDER}/{MODEL_NAME}'
+IMG_PATH = f'{DATA_FOLDER}/{NEW_GESTURE}'
+CATEGORIES = ['palm', 'ok', 'peace', 'fist', 'none']
