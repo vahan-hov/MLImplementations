@@ -74,4 +74,6 @@ pos
 uglies
 *.vec
 
+__pycache__
+
 
