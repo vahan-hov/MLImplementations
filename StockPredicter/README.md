@@ -4,7 +4,7 @@ With the little data I had the model predicts with **~84% accuracy** whether to 
 
 ### Correlation between likes on twitter and the adjusted close price for Tesla's stock
 
-![demo](/home/vahan/Desktop/twitter-price-correlation.png)
+![twitter-price-correlation](https://user-images.githubusercontent.com/37872230/56995277-5e2f0000-6bb2-11e9-8695-d18d96ac0ce2.png)
 
 # Getting started
 Clone the project
