@@ -1,0 +1,10 @@
+main_df_path = 'data/main_df.pickle'
+stock_prices_path = 'data/yahoo_data.pickle'
+tweets_data_path = 'data/tweets_data.pickle'
+
+adj_close_column = 'adjclose'
+pct_change_column = 'pct change'
+yest_adj_close_column = 'yest adjclose'
+target_column = 'target'
+dates_column = 'date'
+likes_column = 'likes'
