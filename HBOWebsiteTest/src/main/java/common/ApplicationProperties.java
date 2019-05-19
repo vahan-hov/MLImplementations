@@ -1,0 +1,12 @@
+package common;
+
+public class ApplicationProperties {
+
+    //Paths, names
+    static final String webPageURL = "https://www.hbo.com";
+    static final String PLATFORM_STRING = "platform";
+    static final String CHROME_STRING = "chrome";
+    static final String FIREFOX_STRING = "firefox";
+    static final String BROWSER_VERSION_STRING = "browserversion";
+    public static final String TEST_OUTPUT_PATH = System.getProperty("user.dir") + "/test-output/testReport.html";
+}
