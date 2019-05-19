@@ -9,6 +9,8 @@ With the little data I had the model predicts with **~84% accuracy** whether to 
 
 # Getting started
 Clone the project
+
+Create a developer account with twitter and put the needed credentials in utils/credentials file if you want to pull data from twitter yourself.
 ## Installings
 Install python 3.6 version or later using
 ```sh
