@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
 from matplotlib import cm
 from scipy.stats import multivariate_normal
-from sklearn.cluster import KMeans
+from clustering import KMeans
 
 
 class GaussianMixture:
@@ -17,7 +18,7 @@ class GaussianMixture:
 		self.n_features = None
 
 	@staticmethod
-	def _visualize(clusters=None, means=None, show=True):
+	def _visualize(clusters, means, show=True):
 		clusters = [np.array(cluster) for cluster in clusters]
 		# check if data is 2 dimensional
 		if clusters[0].shape[1] != 2:
@@ -32,19 +33,9 @@ class GaussianMixture:
 			plt.show()
 
 	def _derive_initial_parameters(self, x):
-		# use sklearn's implementation of KMeans for deriving initial parameters
-		k_means = KMeans(n_clusters=self.k, random_state=0).fit(x)
-		clusters = []
-		covariance_matrices = []
-		cluster_probabilities = []
-		means = k_means.cluster_centers_
-		for i in range(self.k):
-			cluster = x[np.where(k_means.labels_ == i)]
-			clusters.append(cluster)
-			covariance_matrices.append(np.cov(cluster, rowvar=False))
-			cluster_probabilities.append(len(cluster))
-
-		return means, covariance_matrices, cluster_probabilities
+		km = KMeans(k=self.k, tol=self.tol, max_iter=self.max_iter)
+		km.fit(x)
+		return km.means, km.covariance_matrices, km.cluster_probabilities
 
 	# calculating likelihoods that a data point belongs to each cluster
 	@staticmethod
@@ -67,7 +58,10 @@ class GaussianMixture:
 				# assign the data point to a cluster that has max likelihood of having it
 				clusters[np.argmax(likelihoods)].append(data_point)
 
-			prev_centers = means.copy()
+			# remove empty clusters
+			clusters = [cluster for cluster in clusters if cluster != []]
+
+			prev_means = means.copy()
 
 			# calculate means and covariance matrices for new clusters
 			for i, cluster in enumerate(clusters):
@@ -78,11 +72,11 @@ class GaussianMixture:
 				self._visualize(clusters, means, show=True)
 
 			# check if the new means have moved compared to the previous ones
-			if np.allclose(means, prev_centers, atol=self.tol):
+			if np.allclose(means, prev_means, atol=self.tol):
 				self.means = means
 				self.covariance_matrices = covariance_matrices
 				self.cluster_probabilities = cluster_probabilities
-				print('Optimized')
+				print('Optimized Gaussian Mixture')
 
 				if self.visualization_level > 0:
 					self._visualize(clusters, means, show=True)

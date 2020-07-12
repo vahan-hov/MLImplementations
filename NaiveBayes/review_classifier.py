@@ -1,5 +1,3 @@
-# http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz dataset download URL
-
 import os
 from collections import Counter
 from math import log2

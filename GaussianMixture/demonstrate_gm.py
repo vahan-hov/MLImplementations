@@ -1,16 +1,17 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs
+
 from sklearn.model_selection import train_test_split
 from sklearn import mixture
 from gaussian_mixture import GaussianMixture
 
 
-# generate new data or use a previously generated data from pickle
+# get a random generated data
 def get_data(visualize=True, generate_new=False):
 	# generate some random cluster data
 	if generate_new:
-		data_points, _ = make_blobs(n_samples=100, n_features=2, centers=2)
+		data_points, _ = make_blobs(n_samples=100, n_features=3, centers=10)
 		rng = np.random.RandomState(74)
 		transformation = rng.normal(size=(data_points.shape[1], data_points.shape[1]))
 		data_points = np.dot(data_points, transformation)
